@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Testing Musixmatch API</title>
+</head>
+<body>
+  <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='crossorigin='anonymous'></script>
+  <script>
+  
+  const thisAPI = {};
+
+  thisAPI.apiURL = "http://api.musixmatch.com/ws/1.1/track.search";
+  thisAPI.apiKey = "4f71dc3a502c751a4c0164871f365fde";
+  thisAPI.apiEndPoint = "";
+
+  // FROM STACKOVEFLOW
+  thisAPI.getStuff = () => {
+    $.ajax({
+      url: thisAPI.apiURL,
+      type: "GET",
+      dataType: "jsonp",
+      jsonpCallback: 'jsonp_callback',
+      contentType: 'application/json',
+      data: {
+        apikey: thisAPI.apiKey,
+        q_track: "back to december",
+        q_artist: "taylor%20swift",
+        f_has_lyrics: 1,
+        format: "jsonp",
+        callback: "jsonp_callback"
+      },
+      success: function (data) {
+        console.log(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+      } 
+    });
+  }
+
+  thisAPI.init = () => {
+    thisAPI.getStuff();
+  }
+
+  $(() => {
+    thisAPI.init();
+  });
+
+  </script>
+</body>
+</html>
