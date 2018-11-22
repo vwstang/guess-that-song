@@ -70,7 +70,9 @@ app.printHTML = (id, tag, text) => $(`#${id}`).append(`<${tag}>${text}</${tag}>`
 
 //==-- OBJECT NAMESPACE: app --==//
 // Namespace for all logic related to the "Finish the Lyrics" app itself.
-const game = {};
+const game = {
+  
+};
 
 // Default values set for debugging purposes because asynchronous
 game.currTrackID;
