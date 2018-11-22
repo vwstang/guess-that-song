@@ -19,7 +19,9 @@ apiRequest.getLyricsIDList = () => {
       callback: "jsonp_callback",
       f_has_lyrics: 1,
       f_is_instrumental: 0,
-      q_track: "thank u next" // REPLACE THIS TO FIND OUT THE TRACK_ID
+      // q_artist: "Adele",
+      f_artist_id: 346898,
+      q_track: "Someone Like You" // REPLACE THIS TO FIND OUT THE TRACK_ID
     }
   }).then(res => {
     apiRequest.lyricsIDList = res.message.body.track_list;
@@ -44,6 +46,22 @@ apiRequest.getLyrics = trackID => {
   });
 }
 
+apiRequest.getTrack = trackID => {
+  return $.ajax({
+    url: `${apiRequest.apiURL}track.get`,
+    type: "GET",
+    dataType: "jsonp",
+    jsonpCallback: 'jsonp_callback2',
+    contentType: 'application/json',
+    data: {
+      apikey: apiRequest.apiKey,
+      format: "jsonp",
+      callback: "jsonp_callback2",
+      track_id: trackID
+    }
+  });
+}
+
 //==--  --==//
 const app = {};
 
@@ -55,8 +73,11 @@ app.printHTML = (id, tag, text) => $(`#${id}`).append(`<${tag}>${text}</${tag}>`
 const game = {};
 
 // Default values set for debugging purposes because asynchronous
+game.currTrackID;
 game.currLyrics = ["I HAVEN'T LOADED YET"];
 game.currQuestion = ["I ALSO HAVEN'T LOADED YET"];
+game.currAnswerArtist;
+game.currAnswerTrack;
 
 //== METHOD: cleanLyrics ==//
 // Iterates through the lyrics result array and removes unnecessary elements like blank spaces and the "NON COMMERICIAL USE DISCLAIMER" and returns the cleaned array
@@ -74,17 +95,23 @@ game.cleanLyrics = arrLyrics => {
   return tempArray;
 }
 
-// RANDOMIZER
+// LYRIC RANDOMIZER
 game.generateQuestion = arrCleanLyrics => {
   const randomIndex = Math.floor(Math.random() * (arrCleanLyrics.length - 3));
   return arrCleanLyrics.slice(randomIndex, (randomIndex + 3));
 }
 
+// SONG RANDOMIZER
+
+game.getRandomSong = objSongLibrary => {
+  const keys = Object.keys(objSongLibrary);
+  const randomIndex = Math.floor(Math.random() * keys.length);
+  const artistSongList = objSongLibrary[keys[randomIndex]];
+  return artistSongList[Math.floor(Math.random() * artistSongList.length)];
+}
+
 game.getQuestion = () => {
-  // This should be replaced with a function that randomly gets a track ID from data.js compatibleSongs
-  const getRandomTrackID = 160369747;
-  
-  $.when(apiRequest.getLyrics(getRandomTrackID)).then(res => {
+  $.when(apiRequest.getLyrics(game.currTrackID)).then(res => {
     game.currLyrics = game.cleanLyrics(res.message.body.lyrics.lyrics_body.split("\n")); // Selects the lyrics_body property within the result from getLyrics, converts it into an array, and stores the array into game.currLyrics.
     console.log(game.currLyrics); // THIS WORKS
     // console.log(game.genQuestion(game.currLyrics)); // THIS ALSO WORKS
@@ -95,14 +122,69 @@ game.getQuestion = () => {
   });
 }
 
+game.getAnswer = () => {
+  $.when(apiRequest.getTrack(game.currTrackID)).then(res => {
+    console.log(`Artist: ${res.message.body.track.artist_name}, Song: ${res.message.body.track.track_name}`);
+    game.currAnswerArtist = game.toRegEx(res.message.body.track.artist_name);
+    game.currAnswerTrack = game.toRegEx(res.message.body.track.track_name);
+  });
+}
+
+game.toRegEx = string => {
+  const strInput = string.toLowerCase();
+  let strRegEx = "";
+
+  // First, edit the string so non-alphabet characters within the song/artist name are optional in the regex (i.e. ?)
+  for (let i = 0; i < strInput.length; i++) {
+    if (strInput.charCodeAt(i) === 40) {
+      i = strInput.length; // If the current character in the string is a smooth open boi, exit the loop by setting iterator to the string length.
+    } else if (strInput.charCodeAt(i) >= 97 && strInput.charCodeAt(i) <= 122) {
+      strRegEx += strInput[i];
+    } else {
+      strRegEx += strInput[i] + "?";
+    }
+  }
+
+  // Second, trim the string for any instances of "ft." or "feat."
+  const featIndex = strRegEx.indexOf("feat.");
+  const ftIndex = strRegEx.indexOf("ft.");
+
+  if (featIndex !== -1) {
+    strRegEx = strRegEx.substring(0, featIndex);
+  } else if (ftIndex !== -1) {
+    strRegEx = strRegEx.substring(0, ftIndex);
+  }
+
+  // Lastly, return the string as a Regular Expression that is case insensitive
+  return new RegExp(strRegEx, "i");
+}
+
+game.answerCheck = () => {
+  const userArtist = $("#artistName").val();
+  const userTrack = $("#songTitle").val();
+  if (game.currAnswerArtist.test(userArtist) && game.currAnswerTrack.test(userTrack)) {
+    console.log("Correct!");
+  } else {
+    console.log("WRONG!");
+  }
+}
+
 game.init = () => {
   $("#hintButton").on("click", () => {
     if (game.currQuestion.length !== 0) {
       app.printHTML("lyrics", "p", game.currQuestion.shift());
     }
   });
-  
+
+  $("form").on("submit", event => {
+    event.preventDefault();
+    game.answerCheck();
+  });
+
+  game.currTrackID = game.getRandomSong(questionLibrary);
   game.getQuestion();
+  game.getAnswer();
+
 }
 
 $(() => {

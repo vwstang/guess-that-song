@@ -1,0 +1,25 @@
+// color variables
+$yellow: #EFC001;
+$white: #E0E1E5; 
+$textShadowColor: #0E1B23;
+
+//font variables
+$headFont: 'Fredoka One', cursive;
+$bodyFont: 'Open Sans', sans-serif;
+
+// * {
+//     font-size: 62.5%;
+// }
+
+
+
+
+// TEST
+
+body {
+    background: $yellow;
+}
+
+form {
+    font-family: $bodyFont;
+}

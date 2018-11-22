@@ -2,12 +2,44 @@
 // This object stores artist names as keys with values of arrays, which consist of track_ids used for musixmatch API call to get lyrics.
 const questionLibrary = {
   Gotye: [
-    15953433
+    15953433 // Somebody That I Used To Know
   ],
+  // 13958599
   "Ariana Grande": [
-    160369747
+    160369747, // Thank u, next
+    155480782 // God is a woman
+  ],
+  // 33491453
+  Drake: [
+    111790601 // Hotling Bling
+  ],
+  // 259675
+  "Taylor Swift": [
+    74443483, // Style
+    74443482, // Blank Space
+    17170438 // Fifteen
+  ],
+  // 33172369, 31045905 
+  Queen: [
+    828303, // Somebody to Love
+    99467368 // Bohemian Rhapsody
+  ],
+  // 33491916
+  "Justin Bieber": [
+    99575547, // Sorry
+    17957946, // Boyfriend
+    99575546 // What do you mean?
+  ],
+  // 346898
+  Adele: [
+    18470707, // Rolling in the Deep
+    84213309, // Hello
+    18470717 // Someone Like You
   ]
+
 };
+
+/* HOLLLLAAAAAAA ANNNNNNNN-EEEEEEEEEEEE */
 
 const testLyrics = [
   "Thought I'd end up with Sean",
