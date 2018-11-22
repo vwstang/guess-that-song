@@ -67,21 +67,21 @@ const app = {};
 
 app.printHTML = (id, tag, text) => $(`#${id}`).append(`<${tag}>${text}</${tag}>`);
 
-
 //==-- OBJECT NAMESPACE: app --==//
 // Namespace for all logic related to the "Finish the Lyrics" app itself.
 const game = {
-  
+  currTrackID: 0,
+  currLyrics: [],
+  currQuestion: [],
+  currAnswerArtist: "",
+  currAnswerTrack: "",
+  currAttemptCount: 0,
+  currTime: 0,
+  totalScore: 0,
+  totalLives: 3
 };
 
-// Default values set for debugging purposes because asynchronous
-game.currTrackID;
-game.currLyrics = ["I HAVEN'T LOADED YET"];
-game.currQuestion = ["I ALSO HAVEN'T LOADED YET"];
-game.currAnswerArtist;
-game.currAnswerTrack;
-game.totalScore = 0;
-game.currAttemptCount = 0;
+
 
 //== METHOD: cleanLyrics ==//
 // Iterates through the lyrics result array and removes unnecessary elements like blank spaces and the "NON COMMERICIAL USE DISCLAIMER" and returns the cleaned array
@@ -113,23 +113,12 @@ game.getRandomSong = objSongLibrary => {
   return artistSongList[Math.floor(Math.random() * artistSongList.length)];
 }
 
-game.getQuestion = () => {
-  $.when(apiRequest.getLyrics(game.currTrackID)).then(res => {
-    game.currLyrics = game.cleanLyrics(res.message.body.lyrics.lyrics_body.split("\n")); // Selects the lyrics_body property within the result from getLyrics, converts it into an array, and stores the array into game.currLyrics.
-    console.log(game.currLyrics); // THIS WORKS
-    // console.log(game.genQuestion(game.currLyrics)); // THIS ALSO WORKS
-    game.currQuestion = game.generateQuestion(game.currLyrics);
-    console.log(game.currQuestion);
-    // Next step is to randomly pick three lines within the full currLyrics and store them into a separate array OR the same array
-    app.printHTML("lyrics", "p", game.currQuestion.shift());
-  });
-}
-
 game.getAnswer = () => {
   $.when(apiRequest.getTrack(game.currTrackID)).then(res => {
     console.log(`Artist: ${res.message.body.track.artist_name}, Song: ${res.message.body.track.track_name}`);
     game.currAnswerArtist = game.toRegEx(res.message.body.track.artist_name);
     game.currAnswerTrack = game.toRegEx(res.message.body.track.track_name);
+    game.getQuestion();
   });
 }
 
@@ -161,8 +150,41 @@ game.toRegEx = songName => {
   }
 
   // Lastly, return the string as a Regular Expression that is case insensitive
-  return new RegExp(strRegEx, "i");
+  return new RegExp(`^${strRegEx}$`, "i");
 }
+
+game.getQuestion = () => {
+  $.when(apiRequest.getLyrics(game.currTrackID)).then(res => {
+    game.currLyrics = game.cleanLyrics(res.message.body.lyrics.lyrics_body.split("\n")); // Selects the lyrics_body property within the result from getLyrics, converts it into an array, and stores the array into game.currLyrics.
+    console.log(game.currLyrics); // THIS WORKS
+    // console.log(game.genQuestion(game.currLyrics)); // THIS ALSO WORKS
+    game.currQuestion = game.generateQuestion(game.currLyrics);
+    console.log(game.currQuestion);
+    // Next step is to randomly pick three lines within the full currLyrics and store them into a separate array OR the same array
+    app.printHTML("lyrics", "p", game.currQuestion.shift());
+    // START THE TIMER
+    game.startTimer();
+  });
+}
+
+game.startTimer = () => {
+  game.currTime = 30; // This can be changed based on difficulty
+  game.counter = setInterval(game.timer, 1000);
+}
+
+game.timer = function () {
+  let displayTime;
+  game.currTime < 10 ? displayTime = `0:0${game.currTime}` : displayTime = `0:${game.currTime}`;
+  $("#timer").empty();
+  app.printHTML("timer", "span", displayTime);
+  console.log(game.currTime);
+  if (game.currTime <= 0) {
+    clearInterval(game.counter);
+    game.reset();
+  } else {
+    game.currTime--;
+  }
+};
 
 game.answerCheck = () => {
   const userArtist = $("#artistName").val();
@@ -170,8 +192,9 @@ game.answerCheck = () => {
   if (game.currAnswerArtist.test(userArtist) && game.currAnswerTrack.test(userTrack)) {
     console.log("Correct!"); // 
     // RUN UPDATE SCORE METHOD
+    clearInterval(game.counter);
     game.updateScore();
-    console.log(game.totalScore);
+    game.reset();
   } else {
     console.log("WRONG!"); // 
     game.currAttemptCount++;
@@ -182,18 +205,36 @@ game.answerCheck = () => {
 }
 
 game.updateScore = () => {
-  // Base score for correct answer = 500 points
-  // Each reveal hint = -50 points
-  // Each incorrect attempt = -25 points
-  // Seconds left on clock = +10 points
-  let currentScore;
-  let thisVarWeDontHaveYet = 0; // NUMBER OF SECONDS ON THE CLOCK LEFT
+  const baseScore = 500;
+  const timeScoreBonus = 10; // +10 points for every second left on the clock
+  const hintScoreReducer = -50; // -50 points for every hint revealed
+  const incorrectReducer = -25; // -25 points for ever incorrect attempt made
 
-  currentScore = 500 - (50 * Math.abs(game.currQuestion.length - 2)) - (25 * game.currAttemptCount) + (10 * thisVarWeDontHaveYet);
+  // Update the total score
+  game.totalScore += baseScore + (hintScoreReducer * Math.abs(game.currQuestion.length - 2)) + (incorrectReducer * game.currAttemptCount) + (timeScoreBonus * game.currTime);
 
+  // Debugging purposes
+  console.log(game.totalScore);
+}
 
-  // Record current question score to total score and reinitialize current question score
-  game.totalScore += currentScore;
+game.reset = () => {
+  // Empty the HTML tags that show user input values, status and hints!
+  $("#lyrics").empty();
+  $("#status").empty();
+  $("#artistName").val("");
+  $("#songTitle").val("");
+
+  // Reset values
+  game.currTrackID = 0;
+  game.currLyrics = [];
+  game.currQuestion = [];
+  game.currAnswerArtist = "";
+  game.currAnswerTrack = "";
+  game.currAttemptCount = 0;
+  game.currTime = 0;
+
+  game.currTrackID = game.getRandomSong(questionLibrary);
+  game.getAnswer();
 }
 
 game.init = () => {
@@ -208,9 +249,13 @@ game.init = () => {
     game.answerCheck();
   });
 
-  game.currTrackID = game.getRandomSong(questionLibrary);
-  game.getQuestion();
-  game.getAnswer();
+  $("#startButton").on("click", () => {
+    $("#splashPage").toggleClass("hide");
+    $("#gamePage").toggleClass("hide");
+    game.currTrackID = game.getRandomSong(questionLibrary);
+    game.getAnswer(); // WHICH GOES TO GETQUESTION, WHICH THEN GOES TO START TIMER
+  });
+  
 
 }
 

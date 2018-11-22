@@ -1,24 +1,11 @@
-// color variables
-$yellow: #EFC001;
-$white: #E0E1E5; 
-$textShadowColor: #0E1B23;
-
-//font variables
-$headFont: 'Fredoka One', cursive;
-$bodyFont: 'Open Sans', sans-serif;
-
 html {
     font-size: 62.5%;
 }
 
-:root {
-    --text-shadow: #0E1B23;
+body {
+    background: $backgroundColor;
 }
 
-
-// TEST
-
-body {
-    background: $yellow;
-    font-size: 1.8rem;
+.hide {
+  display: none;
 }
