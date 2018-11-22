@@ -5,15 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Guess That Song</title>
+
+  <!-- stylesheet link -->
+  <link rel="stylesheet" href="styles/style.css">
+  <!-- font style -->
+  <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans:400,800" rel="stylesheet">
 </head>
+
 <body>
-  <h1 class="title"></h1>
+  <h1 class="title">Guess That Song</h1>
   <div id="lyrics"></div>
-  <button id="hintButton">GIVE ME HINT JERK</button>
+  
+
+  <form action="">
+    <button id="hintButton" type="button">GIVE ME HINT JERK</button>
+
+    <label for="artistName">Artist Name</label>
+    <input id="artistName" class="" name="artistName" type="text" placeholder="Artist Name">
+
+    <label for="songTitle">Song Title</label>
+    <input id="songTitle" class="" name="songTitle" type="text" placeholder="Song Title">
+
+    <button id="submitButton" type="submit">AM I RIGHT?!</button>
+  </form>
+
   <!-- Link jQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Usage tracking required by musixmatch API -->
   <script type="text/javascript" src="http://tracking.musixmatch.com/t1.0/AMa6hJCIEzn1v8RuOP"></script>
+  <!-- Link data.js -->
+  <script type="text/javascript" src="./js/data.js"></script>
   <!-- Link app.js -->
   <script type="text/javascript" src="./js/app.js"></script>
 </body>
