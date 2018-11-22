@@ -13,27 +13,52 @@
 </head>
 
 <body>
+  <main>
+    <div id="splashPage" class="splashPage">
+      <h1 class="title">Guess That Song</h1>
+      <button id="startButton" type="button">Start Game</button>
+      <button id="settingsButton" type="button">Settings</button>
+    </div>
 
-  <h1 class="title">Guess That Song</h1>
+    <div id="gamePage" class="gamePage hide">
+        <div class="header">
+          <ul>
+            <li>
+              <!-- Timer -->
+              <p id="timer"></p>
+            </li>
+            <li>
+              <h2 class="titleLogo">Guess That Song</h2>
+            </li>
+            <li>
+              <!-- Exit Button -->
+              <button id="exitButton" type="button">GET ME OUTTA HERE</button>              
+            </li>
+          </ul>
+        </div>
+        <div class="lyrics" id="lyrics">
+          <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
+        </div>
+        
+        <form action="">
+          <button id="hintButton" type="button">GIVE ME HINT JERK</button>
+        
+          <label for="artistName">Artist Name</label>
+          <input id="artistName" class="" name="artistName" type="text" placeholder="Artist Name" autocomplete="off">
+        
+          <label for="songTitle">Song Title</label>
+          <input id="songTitle" class="" name="songTitle" type="text" placeholder="Song Title" autocomplete="off">
+        
+          <button id="submitButton" type="submit">AM I RIGHT?!</button>
+        </form>
+        <section id="status">
+          <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
+        </section>
 
+    </div>
+  </main>
   
-  <div class="lyrics" id="lyrics"></div>
-  
 
-  <form action="">
-    <button id="hintButton" type="button">GIVE ME HINT JERK</button>
-
-    <label for="artistName">Artist Name</label>
-    <input id="artistName" class="" name="artistName" type="text" placeholder="Artist Name" autocomplete="off">
-
-    <label for="songTitle">Song Title</label>
-    <input id="songTitle" class="" name="songTitle" type="text" placeholder="Song Title" autocomplete="off">
-
-    <button id="submitButton" type="submit">AM I RIGHT?!</button>
-  </form>
-  <section id="status">
-    <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
-  </section>
 
   <!-- Link jQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
