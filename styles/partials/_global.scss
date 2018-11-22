@@ -7,19 +7,18 @@ $textShadowColor: #0E1B23;
 $headFont: 'Fredoka One', cursive;
 $bodyFont: 'Open Sans', sans-serif;
 
-// * {
-//     font-size: 62.5%;
-// }
+html {
+    font-size: 62.5%;
+}
 
-
+:root {
+    --text-shadow: #0E1B23;
+}
 
 
 // TEST
 
 body {
     background: $yellow;
-}
-
-form {
-    font-family: $bodyFont;
+    font-size: 1.8rem;
 }

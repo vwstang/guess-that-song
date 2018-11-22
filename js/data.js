@@ -39,8 +39,6 @@ const questionLibrary = {
 
 };
 
-/* HOLLLLAAAAAAA ANNNNNNNN-EEEEEEEEEEEE */
-
 const testLyrics = [
   "Thought I'd end up with Sean",
   "But he wasn't a match",
