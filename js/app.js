@@ -78,6 +78,8 @@ game.currLyrics = ["I HAVEN'T LOADED YET"];
 game.currQuestion = ["I ALSO HAVEN'T LOADED YET"];
 game.currAnswerArtist;
 game.currAnswerTrack;
+game.totalScore = 0;
+game.currAttemptCount = 0;
 
 //== METHOD: cleanLyrics ==//
 // Iterates through the lyrics result array and removes unnecessary elements like blank spaces and the "NON COMMERICIAL USE DISCLAIMER" and returns the cleaned array
@@ -102,7 +104,6 @@ game.generateQuestion = arrCleanLyrics => {
 }
 
 // SONG RANDOMIZER
-
 game.getRandomSong = objSongLibrary => {
   const keys = Object.keys(objSongLibrary);
   const randomIndex = Math.floor(Math.random() * keys.length);
@@ -130,18 +131,20 @@ game.getAnswer = () => {
   });
 }
 
-game.toRegEx = string => {
-  const strInput = string.toLowerCase();
+//==-- METHOD: toRegEx --==//
+// Converts a song name into a regular expression to allow for fuzzy check against user answers.
+game.toRegEx = songName => {
+  const normalizeName = songName.toLowerCase();
   let strRegEx = "";
 
   // First, edit the string so non-alphabet characters within the song/artist name are optional in the regex (i.e. ?)
-  for (let i = 0; i < strInput.length; i++) {
-    if (strInput.charCodeAt(i) === 40) {
-      i = strInput.length; // If the current character in the string is a smooth open boi, exit the loop by setting iterator to the string length.
-    } else if (strInput.charCodeAt(i) >= 97 && strInput.charCodeAt(i) <= 122) {
-      strRegEx += strInput[i];
+  for (let i = 0; i < normalizeName.length; i++) {
+    if (normalizeName.charCodeAt(i) === 40) {
+      i = normalizeName.length; // If the current character in the string is a smooth open boi, exit the loop by setting iterator to the string length.
+    } else if (normalizeName.charCodeAt(i) >= 97 && normalizeName.charCodeAt(i) <= 122) {
+      strRegEx += normalizeName[i];
     } else {
-      strRegEx += strInput[i] + "?";
+      strRegEx += normalizeName[i] + "?";
     }
   }
 
@@ -163,10 +166,32 @@ game.answerCheck = () => {
   const userArtist = $("#artistName").val();
   const userTrack = $("#songTitle").val();
   if (game.currAnswerArtist.test(userArtist) && game.currAnswerTrack.test(userTrack)) {
-    console.log("Correct!");
+    console.log("Correct!"); // 
+    // RUN UPDATE SCORE METHOD
+    game.updateScore();
+    console.log(game.totalScore);
   } else {
-    console.log("WRONG!");
+    console.log("WRONG!"); // 
+    game.currAttemptCount++;
+    console.log(game.currAttemptCount);
+    // Want to display something on the page that says "Wrong sucka"
+    app.printHTML("status", "p", "Wrong, try again!");
   }
+}
+
+game.updateScore = () => {
+  // Base score for correct answer = 500 points
+  // Each reveal hint = -50 points
+  // Each incorrect attempt = -25 points
+  // Seconds left on clock = +10 points
+  let currentScore;
+  let thisVarWeDontHaveYet = 0; // NUMBER OF SECONDS ON THE CLOCK LEFT
+
+  currentScore = 500 - (50 * Math.abs(game.currQuestion.length - 2)) - (25 * game.currAttemptCount) + (10 * thisVarWeDontHaveYet);
+
+
+  // Record current question score to total score and reinitialize current question score
+  game.totalScore += currentScore;
 }
 
 game.init = () => {
