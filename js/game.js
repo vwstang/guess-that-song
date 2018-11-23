@@ -12,40 +12,14 @@ const game = {
   difficultyLevel: $("input[name=difficulty]:checked").val()
 };
 
+//== METHOD: startQuestion ==//
+// Obtains a random track_id from questionLibrary object (which stores songs that are compatible with this game) and fires off the question logic
 game.startQuestion = () => {
   game.currTrackID = game.getRandomSong(questionLibrary);
   game.getAnswer();
 }
 
-// // Print current life to the DOM
-// game.displayLife = () => {
-//   $("#lives").empty();
-//   app.printHTML("lives", "span", game.totalLives);
-// }
-
-//== METHOD: cleanLyrics ==//
-// Iterates through the lyrics result array and removes unnecessary elements like blank spaces and the "NON COMMERICIAL USE DISCLAIMER" and returns the cleaned array
-game.cleanLyrics = arrLyrics => {
-  let tempArray = [];
-  for (let i = 0; i < arrLyrics.length; i++) {
-    if (arrLyrics[i] === "...") {
-      i = arrLyrics.length;
-    } else if (arrLyrics[i] === "") {
-      i = i;
-    } else {
-      tempArray.push(arrLyrics[i]);
-    }
-  }
-  return tempArray;
-}
-
-// LYRIC RANDOMIZER
-game.generateQuestion = arrCleanLyrics => {
-  const randomIndex = Math.floor(Math.random() * (arrCleanLyrics.length - 3));
-  return arrCleanLyrics.slice(randomIndex, (randomIndex + 3));
-}
-
-//==-- METHOD: getRandomSong --==//
+//== METHOD: getRandomSong ==//
 // Randomly select a song from the object passed in. Object passed in must consist of arrays.
 // Called from game.startQuestion()
 game.getRandomSong = objSongLibrary => {
@@ -113,7 +87,7 @@ game.toRegEx = strArtistOrSong => {
   return new RegExp(`^${strRegEx}$`, "i");
 }
 
-//==-- METHOD: getQuestion --==//
+//== METHOD: getQuestion ==//
 // Make an AJAX request to get the lyrics for the track_id passed to the API. When that is completed, then clean the response string up (because we are using the API for free, it includes unwanted text in the response string, so we need to trim those out for the game).
 // Called from game.getAnswer()
 game.getQuestion = () => {
@@ -133,9 +107,32 @@ game.getQuestion = () => {
   });
 }
 
+//== METHOD: cleanLyrics ==//
+// Iterates through the lyrics result array and removes unnecessary elements like blank spaces and the "NON COMMERICIAL USE DISCLAIMER" and returns the cleaned array
+game.cleanLyrics = arrLyrics => {
+  let tempArray = [];
+  for (let i = 0; i < arrLyrics.length; i++) {
+    if (arrLyrics[i] === "...") {
+      i = arrLyrics.length;
+    } else if (arrLyrics[i] === "") {
+      i = i;
+    } else {
+      tempArray.push(arrLyrics[i]);
+    }
+  }
+  return tempArray;
+}
+
+//== METHOD: generateQuestion ==//
+// Receives an array with elements made up of lyric lines and returns 3 lines of lyrics selected at random (not 3 random lines, but randomly select a line and return that line and 2 following lines)
+game.generateQuestion = arrCleanLyrics => {
+  const randomIndex = Math.floor(Math.random() * (arrCleanLyrics.length - 3));
+  return arrCleanLyrics.slice(randomIndex, (randomIndex + 3));
+}
+
 //==-- METHOD: startTimer --==//
 // Start the game timer!
-// Called from game.startGame()
+// Called from #startButton on click event
 game.startTimer = () => {
   // Set the game timer depending on the difficulty level. Default case should NEVER be run.
   switch (game.difficultyLevel) {
@@ -225,19 +222,16 @@ game.updateScore = () => {
   switch (game.difficultyLevel) {
     case "easy":
       baseScore = 300;
-      timeScoreBonus = 5;
       hintScoreReducer = -25;
       incorrectReducer = -10;
       break;
     case "normal":
       baseScore = 500;
-      timeScoreBonus = 10;
       hintScoreReducer = -50;
       incorrectReducer = -20;
       break;
     case "hard":
       baseScore = 700;
-      timeScoreBonus = 15;
       hintScoreReducer = -75;
       incorrectReducer = -30;
       break;
@@ -248,13 +242,12 @@ game.updateScore = () => {
 
   // For debugging purposes
   console.log(`Base Score: ${baseScore}`);
-  console.log(`Time Bonus: ${game.currTime} x ${timeScoreBonus} = ${(timeScoreBonus * game.currTime)}`);
   console.log(`Revealed Hints: ${(game.currQuestion.length - 2)} x ${hintScoreReducer} = ${(hintScoreReducer * Math.abs(game.currQuestion.length - 2))}`);
   console.log(`Incorrect Attempts: ${game.currAttemptCount} x ${incorrectReducer} = ${(incorrectReducer * game.currAttemptCount)}`);
-  console.log(`Current Question Score: ${baseScore + (timeScoreBonus * game.currTime) + (hintScoreReducer * Math.abs(game.currQuestion.length - 2)) + (incorrectReducer * game.currAttemptCount)}`);
+  console.log(`Current Question Score: ${baseScore + (hintScoreReducer * Math.abs(game.currQuestion.length - 2)) + (incorrectReducer * game.currAttemptCount)}`);
 
   // Update the total score
-  game.totalScore += baseScore + (timeScoreBonus * game.currTime) + (hintScoreReducer * Math.abs(game.currQuestion.length - 2)) + (incorrectReducer * game.currAttemptCount);
+  game.totalScore += Math.max((baseScore + (hintScoreReducer * Math.abs(game.currQuestion.length - 2)) + (incorrectReducer * game.currAttemptCount)),0);
 
   // Debugging purposes
   console.log(`Current total score: ${game.totalScore}`);
@@ -277,9 +270,6 @@ game.resetQuestion = () => {
 }
 
 game.resetGame = () => {
-  // Clear the interval
-  clearInterval(game.counter);
-
   // Reset values and clock
   game.resetQuestion();
   game.totalScore = 0;
@@ -288,19 +278,25 @@ game.resetGame = () => {
 }
 
 game.endGame = () => {
-  alert("DING DING DING! Time's up!");
-  const playerName = prompt("Great job! What's your name?");
-  alert(`${playerName}'s total score is: ${game.totalScore}`);
+  // Clear the interval
+  clearInterval(game.counter);
+
+  const playerName = prompt("Enter your name, you magical lyricist:") || "Wild Jigglypuff";
+
+  // For debugging purposes
+  console.log(`${playerName}'s total score is: ${game.totalScore}`);
+  
   // FIREBASE STORAGE OF PLAYER SCORE
   const scoreEntry = {
     name: playerName,
     score: game.totalScore
   }
-
+  
   leaderboard.db.push(scoreEntry);
-
+  
   // Reset the game and then go back to the home page
   game.resetGame();
+
   $("#gamePage").toggleClass("hide");
   $("#splashPage").toggleClass("hide");
 }
