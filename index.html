@@ -15,14 +15,17 @@
 </head>
 
 <body>
-  <main>
-    <section id="splashPage" class="splashPage">
+  <main class="wrapper">
+    <section id="splashPage" class="splashPageTitle">
       <h1 class="title"><span>Guess</span><span>That</span><span>Song</span></h1> 
-      <button class="startButton" id="startButton" type="button"><p>Start Game</p></button>
-      <button class="settingButton" id="settingsButton" type="button"><p>Settings</p></button>
-      <button class="leaderboardButton" id="leaderboardButton">Leaderboard</button>
+      <section class="splashPageButtons">
+        <button class="btn startButton" id="startButton" type="button"><p>Start Game</p></button>
+        <button class="btn settingButton" id="settingsButton" type="button"><p>Settings</p></button>
+        <button class="btn leaderboardButton" id="leaderboardButton" type="button"><p>Leaderboard</p></button>
+      </section>
     </section>
-    <article class="settingsPopUp hide">
+
+    <article class="settingsPopUp">
       <div id="exitSettings"></div>
       <div class="instructions">
         <h3>INSTRUCTIONS</h3>
@@ -41,15 +44,15 @@
         <ul>
           <li>
             <!-- Timer -->
-            <p id="timer"></p>
+            <p class= "timer" id= "timer"></p>
 
           </li>
           <li>
-            <h2 class="titleLogo">Guess That Song</h2>
+            <h2 class="titleLogo"><span>Guess</span><span>That</span><span>Song</span></h2>
           </li>
           <li>
             <!-- Exit Button -->
-            <button class="exitButton" id="exitButton" type="button"> <p>GET ME OUTTA HERE</p> </button>              
+            <button class="btn btnGamePage exitButton" id="exitButton" type="button"> <p>GET ME OUTTA HERE</p> </button>              
           </li>
         </ul>
       </div>
@@ -58,7 +61,7 @@
       </div>
       
       <form action="">
-        <button class="hintButton" id="hintButton" type="button"><p>GIVE ME HINT JERK</p></button>
+        <button class="btn btnGamePage hintButton" id="hintButton" type="button"><p>GIVE ME HINT JERK</p></button>
         
         <label for="artistName">Artist Name</label>
         <input id="artistName" class="" name="artistName" type="text" placeholder="Artist Name" autocomplete="off">
@@ -67,9 +70,9 @@
         <input id="songTitle" class="" name="songTitle" type="text" placeholder="Song Title" autocomplete="off">
         
         
-        <button class="submitButton" id="submitButton" type="submit"> <p>AM I RIGHT?!</p></button>
+        <button class="btn btnGamePage submitButton" id="submitButton" type="submit"> <p>AM I RIGHT?!</p></button>
 
-        <button class="passButton" id="passButton" type="button"> <p>PASS</p> </button>
+        <button class="btn btnGamePage passButton" id="passButton" type="button"> <p>PASS</p> </button>
       </form>
       <section id="status">
         <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->

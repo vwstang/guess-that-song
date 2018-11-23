@@ -1,6 +1,5 @@
 .gamePage {
-    border: 1px solid red;
-    background: $gtsColor;
+    margin-top: 6.5rem;
 }
 
 .header {
@@ -10,4 +9,14 @@
 ul {
     list-style-type: none;
 
+}
+
+.titleLogo {
+    @include headerFont($text-medium, $gtsColor);
+    text-align: center;
+    text-shadow: var(--text-shadow) 1px 1px,var(--text-shadow) -0px 0px,var(--text-shadow) -1px 1px,var(--text-shadow) -2px 2px,var(--text-shadow) -3px 3px,var(--text-shadow) -4px 4px,var(--text-shadow) -5px 5px,var(--text-shadow) -6px 6px,var(--text-shadow) -7px 7px;
+
+    & span {
+        display: block;
+    }
 }
