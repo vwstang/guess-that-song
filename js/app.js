@@ -81,7 +81,11 @@ const game = {
   totalLives: 3
 };
 
-
+// Print current life to the DOM
+game.displayLife = () => {
+  $("#lives").empty();
+  app.printHTML("lives", "span", game.totalLives);
+}
 
 //== METHOD: cleanLyrics ==//
 // Iterates through the lyrics result array and removes unnecessary elements like blank spaces and the "NON COMMERICIAL USE DISCLAIMER" and returns the cleaned array
@@ -179,8 +183,10 @@ game.timer = function () {
   app.printHTML("timer", "span", displayTime);
   console.log(game.currTime);
   if (game.currTime <= 0) {
-    clearInterval(game.counter);
+    game.totalLives--;
     game.reset();
+    alert("Chill out. Keep on truckin\'"); // This is where we will show a pop up of whether they got the answer correct or then show the correct answer
+    game.start();
   } else {
     game.currTime--;
   }
@@ -192,9 +198,9 @@ game.answerCheck = () => {
   if (game.currAnswerArtist.test(userArtist) && game.currAnswerTrack.test(userTrack)) {
     console.log("Correct!"); // 
     // RUN UPDATE SCORE METHOD
-    clearInterval(game.counter);
     game.updateScore();
     game.reset();
+    game.start();
   } else {
     console.log("WRONG!"); // 
     game.currAttemptCount++;
@@ -218,6 +224,9 @@ game.updateScore = () => {
 }
 
 game.reset = () => {
+  // Clear the interval
+  clearInterval(game.counter);
+
   // Empty the HTML tags that show user input values, status and hints!
   $("#lyrics").empty();
   $("#status").empty();
@@ -232,7 +241,9 @@ game.reset = () => {
   game.currAnswerTrack = "";
   game.currAttemptCount = 0;
   game.currTime = 0;
+}
 
+game.start = () => {
   game.currTrackID = game.getRandomSong(questionLibrary);
   game.getAnswer();
 }
@@ -252,11 +263,14 @@ game.init = () => {
   $("#startButton").on("click", () => {
     $("#splashPage").toggleClass("hide");
     $("#gamePage").toggleClass("hide");
-    game.currTrackID = game.getRandomSong(questionLibrary);
-    game.getAnswer(); // WHICH GOES TO GETQUESTION, WHICH THEN GOES TO START TIMER
+    game.start();
   });
-  
 
+  $("#exitButton").on("click", () => {
+    game.reset();
+    $("#gamePage").toggleClass("hide");
+    $("#splashPage").toggleClass("hide");
+  });
 }
 
 $(() => {
