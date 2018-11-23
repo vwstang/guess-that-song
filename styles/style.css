@@ -136,7 +136,8 @@ html {
   font-size: 62.5%; }
 
 body {
-  background: #EFC001; }
+  background: #EFC001;
+  font-size: 1.8rem; }
 
 .hide {
   display: none; }

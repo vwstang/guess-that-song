@@ -19,7 +19,7 @@
       <button id="startButton" type="button">Start Game</button>
       <button id="settingsButton" type="button">Settings</button>
     </section>
-    <article class="settingsPopUp hide">
+    <article class="settingsPopUp">
       <div id="exitSettings"></div>
       <div class="instructions">
         <h3>INSTRUCTIONS</h3>
@@ -27,18 +27,16 @@
       </div>
       <h3>DIFFICULTY</h3>
       <label for="easy">Easy</label>
-      <input id="easy" type="radio" name="difficulty">
+      <input id="easy" value="easy" type="radio" name="difficulty">
       <label for="normal">Normal</label>
-      <input id="normal" type="radio" name="difficulty">
+      <input id="normal" value="normal" type="radio" name="difficulty" checked>
       <label for="hard">Hard</label>
-      <input id="hard" type="radio" name="difficulty">
+      <input id="hard" value="hard" type="radio" name="difficulty">
     </article>
     <section id="gamePage" class="gamePage hide">
       <div class="header">
         <ul>
           <li>
-            <!-- Lives -->
-            <p id="lives"></p>
             <!-- Timer -->
             <p id="timer"></p>
 
@@ -66,6 +64,8 @@
         <input id="songTitle" class="" name="songTitle" type="text" placeholder="Song Title" autocomplete="off">
       
         <button id="submitButton" type="submit">AM I RIGHT?!</button>
+
+        <button id="passButton" type="button">PASS</button>
       </form>
       <section id="status">
         <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
