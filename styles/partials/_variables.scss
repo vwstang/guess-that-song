@@ -1,7 +1,11 @@
 // color variables
 $backgroundColor: #EFC001;
-$headerColor: #E0E1E5;
-$pink-hot: #F2385A;
+$accentColor: #3498db;
+$gtsColor: #E0E1E5;
+
+:root {
+    --text-shadow: #0E1B23;
+}
 
 //font variables
 $headFont: 'Fredoka One', cursive;

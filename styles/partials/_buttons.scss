@@ -1,32 +1,38 @@
 // Splash Page Buttons
 
-.startButton, .settingButton {
+.startButton, .settingButton, .exitButton, .hintButton, .submitButton, .passButton {
     position: relative;
+    margin: 1rem 0 1rem 3.5rem;;
     top: 0;
     left: 0;
-    background: #3498db;
+    background: $accentColor;
     width: 180px;
     padding: 4px 0;
     border-radius: 10px;
     border: none;
-    box-shadow: 10px 10px;
+    box-shadow: var(--text-shadow) 1px 1px,var(--text-shadow) 2px 2px,var(--text-shadow) 3px 3px,var(--text-shadow) 4px 4px,var(--text-shadow) 5px 5px,var(--text-shadow) 6px 6px,var(--text-shadow) 7px 7px,var(--text-shadow) 8px 8px,var(--text-shadow) 9px 9px,var(--text-shadow) 10px 10px,var(--text-shadow) 11px 11px;
 
     &:active {
-        top: 5px;
-        left: 5px;
-        box-shadow: 5px 5px;
+      top: 2px;
+      left: 2px;
+      box-shadow: 5px 5px;
     }
 
      p {
-   	font-family: $bodyFont; 
-	text-align: center;
-  	text-transform: uppercase;
-    color: #FFF;
-    user-select: none;
+      font-family: $bodyFont; 
+      text-align: center;
+      text-transform: uppercase;
+      color: #FFF;
+      user-select: none;
   }
   
     &:hover {
         cursor: pointer;
+        background: lighten($accentColor, 10%);
   }
 
+}
+
+.exitButton {
+  margin: 0;
 }
