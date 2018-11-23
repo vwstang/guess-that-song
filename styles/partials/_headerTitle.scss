@@ -2,13 +2,10 @@
 //     border: 1px solid red;
 // }
 
-:root {
-    --text-shadow: #0E1B23;
-}
 
 h1 {
-    @include headerFont($guessThatGame-text, $headerColor);
-    margin-bottom: 20rem;
+    @include headerFont($guessThatGame-text, $gtsColor);
+    margin-bottom: 15rem;
 }
 
 h1 span {

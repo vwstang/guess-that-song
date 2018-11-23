@@ -1,4 +1,13 @@
 form {
     font-family: $bodyFont;
     @include font-size(2);
+
+    & label {
+        display:none;
+    }
+
+    & button {
+        display:block;
+        margin: 2rem auto;
+    }
 }
