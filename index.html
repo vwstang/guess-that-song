@@ -14,55 +14,64 @@
 
 <body>
   <main>
-    <div id="splashPage" class="splashPage">
+    <section id="splashPage" class="splashPage">
       <h1 class="title">Guess That Song</h1>
       <button id="startButton" type="button">Start Game</button>
       <button id="settingsButton" type="button">Settings</button>
-    </div>
+    </section>
+    <article class="settingsPopUp hide">
+      <div id="exitSettings"></div>
+      <div class="instructions">
+        <h3>INSTRUCTIONS</h3>
+        <p>HERE ARE INSTRUCTIONS ON HOW TO PLAY THE GAME AND YOU CAN PROBABLY JUST MIRROR HTIS FROM THE README OR MAKE IT BETTER IF YOU LIKE TO WRITE MORE</p>
+      </div>
+      <h3>DIFFICULTY</h3>
+      <label for="easy">Easy</label>
+      <input id="easy" type="radio" name="difficulty">
+      <label for="normal">Normal</label>
+      <input id="normal" type="radio" name="difficulty">
+      <label for="hard">Hard</label>
+      <input id="hard" type="radio" name="difficulty">
+    </article>
+    <section id="gamePage" class="gamePage hide">
+      <div class="header">
+        <ul>
+          <li>
+            <!-- Lives -->
+            <p id="lives"></p>
+            <!-- Timer -->
+            <p id="timer"></p>
 
-    <div id="gamePage" class="gamePage hide">
-        <div class="header">
-          <ul>
-            <li>
-              <!-- Lives -->
-              <p id="lives"></p>
-              <!-- Timer -->
-              <p id="timer"></p>
-
-            </li>
-            <li>
-              <h2 class="titleLogo">Guess That Song</h2>
-            </li>
-            <li>
-              <!-- Exit Button -->
-              <button id="exitButton" type="button">GET ME OUTTA HERE</button>              
-            </li>
-          </ul>
-        </div>
-        <div class="lyrics" id="lyrics">
-          <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
-        </div>
-        
-        <form action="">
-          <button id="hintButton" type="button">GIVE ME HINT JERK</button>
-        
-          <label for="artistName">Artist Name</label>
-          <input id="artistName" class="" name="artistName" type="text" placeholder="Artist Name" autocomplete="off">
-        
-          <label for="songTitle">Song Title</label>
-          <input id="songTitle" class="" name="songTitle" type="text" placeholder="Song Title" autocomplete="off">
-        
-          <button id="submitButton" type="submit">AM I RIGHT?!</button>
-        </form>
-        <section id="status">
-          <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
-        </section>
-
-    </div>
+          </li>
+          <li>
+            <h2 class="titleLogo">Guess That Song</h2>
+          </li>
+          <li>
+            <!-- Exit Button -->
+            <button id="exitButton" type="button">GET ME OUTTA HERE</button>              
+          </li>
+        </ul>
+      </div>
+      <div class="lyrics" id="lyrics">
+        <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
+      </div>
+      
+      <form action="">
+        <button id="hintButton" type="button">GIVE ME HINT JERK</button>
+      
+        <label for="artistName">Artist Name</label>
+        <input id="artistName" class="" name="artistName" type="text" placeholder="Artist Name" autocomplete="off">
+      
+        <label for="songTitle">Song Title</label>
+        <input id="songTitle" class="" name="songTitle" type="text" placeholder="Song Title" autocomplete="off">
+      
+        <button id="submitButton" type="submit">AM I RIGHT?!</button>
+      </form>
+      <section id="status">
+        <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
+      </section>
+    </section>
   </main>
-  
-
-
   <!-- Link jQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Usage tracking required by musixmatch API -->
