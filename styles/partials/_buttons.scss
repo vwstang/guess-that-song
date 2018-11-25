@@ -1,56 +1,53 @@
+.btn {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 80%;
+  background: $accentColor;
+  padding: 10px 0;
+  border-radius: 10px;
+  border: none;
+  box-shadow: var(--text-shadow) 1px 1px,var(--text-shadow) 2px 2px,var(--text-shadow) 3px 3px,var(--text-shadow) 4px 4px,var(--text-shadow) 5px 5px,var(--text-shadow) 6px 6px,var(--text-shadow) 7px 7px,var(--text-shadow) 8px 8px,var(--text-shadow) 9px 9px,var(--text-shadow) 10px 10px,var(--text-shadow) 11px 11px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFF;
+  user-select: none;
+
+  &:active {
+    top: 6px;
+    left: 6px;
+    box-shadow: 5px 5px var(--text-shadow);
+  }
+
+  &:hover {
+      cursor: pointer;
+      background: lighten($accentColor, 10%);
+  }
+}
 
 .splashPageButtons  {
   display: flex;
   flex-direction: column;
-  margin: 1rem;
-}
+  align-items: center;
+  align-self: center;
+  width: 180px;
 
-
-.btn {
-    position: relative;
-    margin: 1rem auto; 
-    top: 0;
-    left: 0;
-    background: $accentColor;
-    width: 180px;
-    padding: 4px 0;
-    border-radius: 10px;
-    border: none;
-    box-shadow: var(--text-shadow) 1px 1px,var(--text-shadow) 2px 2px,var(--text-shadow) 3px 3px,var(--text-shadow) 4px 4px,var(--text-shadow) 5px 5px,var(--text-shadow) 6px 6px,var(--text-shadow) 7px 7px,var(--text-shadow) 8px 8px,var(--text-shadow) 9px 9px,var(--text-shadow) 10px 10px,var(--text-shadow) 11px 11px;
-
-    &:active {
-      top: 2px;
-      left: 2px;
-      box-shadow: 5px 5px;
-    }
-
-     p {
-      font-family: $bodyFont; 
-      text-align: center;
-      text-transform: uppercase;
-      color: #FFF;
-      user-select: none;
+  & button:nth-child(2) {
+    margin: 1.5rem 0;
   }
-  
-    &:hover {
-        cursor: pointer;
-        background: lighten($accentColor, 10%);
-  }
-
 }
 
 .btnGamePage {
-  @include fontSize(1.5);
-  box-shadow: var(--text-shadow) 1px 1px,var(--text-shadow) -0px 0px,var(--text-shadow) -1px 1px,var(--text-shadow) -2px 2px,var(--text-shadow) -3px 3px,var(--text-shadow) -4px 4px,var(--text-shadow) -5px 5px,var(--text-shadow) -6px 6px,var(--text-shadow) -7px 7px;
-}
+  box-shadow: var(--text-shadow) -1px 1px,
+              var(--text-shadow) -2px 2px,
+              var(--text-shadow) -3px 3px,
+              var(--text-shadow) -4px 4px,
+              var(--text-shadow) -5px 5px;
+  margin-top: 1.5rem;
 
-.hintButton {
-  margin-bottom: 2rem;
-}
-
-.centerButton {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  
+  &:active {
+    top: 3px;
+    left: -3px;
+    box-shadow: -2px 2px var(--text-shadow);
+  }
 }

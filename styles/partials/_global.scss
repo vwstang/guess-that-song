@@ -3,16 +3,21 @@ html {
 }
 
 body {
-    background: $backgroundColor;
-    font-size: $primary-text;
-}
-
-.hide {
-  display: none;
+  background: $backgroundColor;
+  font-size: $primary-text;
+  font-family: $bodyFont;
 }
 
 .wrapper {
-    max-width:1280px;
-    width:80%;
-    margin:0 auto;
+  height: 100vh;
+  min-height: 480px;
+  width: 100%;
+  min-width: 320px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: $wrapper-padding-mobile 0;
+
+  &--splash {
+    padding: $wrapper-padding-mobile;
+  }
 }
