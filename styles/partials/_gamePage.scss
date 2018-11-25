@@ -1,22 +1,42 @@
-.gamePage {
-    margin-top: 6.5rem;
-}
+
 
 .header {
-    border: 1px solid orange;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: -3rem;
 }
 
-ul {
-    list-style-type: none;
+.timer {
+    text-align: center;
+     margin: 0 auto;
+}
 
+
+ul {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    list-style-type: none;
 }
 
 .titleLogo {
     @include headerFont($text-medium, $gtsColor);
     text-align: center;
     text-shadow: var(--text-shadow) 1px 1px,var(--text-shadow) -0px 0px,var(--text-shadow) -1px 1px,var(--text-shadow) -2px 2px,var(--text-shadow) -3px 3px,var(--text-shadow) -4px 4px,var(--text-shadow) -5px 5px,var(--text-shadow) -6px 6px,var(--text-shadow) -7px 7px;
+    margin: 0 auto;
 
     & span {
         display: block;
     }
+}
+
+.lyrics {
+    background: $gtsColor;
+    border: 5px solid darken($gtsColor, 50%);
+    border-radius: 10px;
+    @include fontSize(2);
+    text-align: center;
+    padding: 1rem;
+    margin: 0 auto;
 }

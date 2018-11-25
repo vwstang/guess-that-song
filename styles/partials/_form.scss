@@ -1,13 +1,12 @@
 form {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
     font-family: $bodyFont;
-    @include font-size(2);
+    @include fontSize(2);
 
     & label {
         display:none;
-    }
-
-    & button {
-        display:block;
-        margin: 2rem auto;
     }
 }

@@ -25,7 +25,7 @@
       </section>
     </section>
 
-    <article class="settingsPopUp">
+    <article class="settingsPopUp hide">
       <div id="exitSettings"></div>
       <div class="instructions">
         <h3>INSTRUCTIONS</h3>
@@ -64,16 +64,18 @@
         <button class="btn btnGamePage hintButton" id="hintButton" type="button"><p>GIVE ME HINT JERK</p></button>
         
         <label for="artistName">Artist Name</label>
-        <input id="artistName" class="" name="artistName" type="text" placeholder="Artist Name" autocomplete="off">
+        <input id="artistName" class="artistName" name="artistName" type="text" placeholder="Artist Name" autocomplete="off">
         
         <label for="songTitle">Song Title</label>
-        <input id="songTitle" class="" name="songTitle" type="text" placeholder="Song Title" autocomplete="off">
+        <input id="songTitle" class="songTitle" name="songTitle" type="text" placeholder="Song Title" autocomplete="off">
         
         
         <button class="btn btnGamePage submitButton" id="submitButton" type="submit"> <p>AM I RIGHT?!</p></button>
 
-        <button class="btn btnGamePage passButton" id="passButton" type="button"> <p>PASS</p> </button>
       </form>
+      <div class="centerButton">
+        <button class="btn btnGamePage passButton" id="passButton" type="button"> <p>PASS</p></button>
+      </div>
       <section id="status">
         <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
       </section>
