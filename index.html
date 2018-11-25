@@ -14,6 +14,14 @@
 </head>
 <body>
   <main>
+    <!-- particles.js container -->
+    <div id="particles-js"></div>
+    
+    <!-- stats - count particles -->
+    <div class="count-particles">
+      <span class="js-count-particles"></span>
+    </div>
+
     <section id="splashPage" class="splashPageTitle">
       <div class="wrapper wrapper--splash">
         <h1 class="title"><span>Guess</span><span>That</span><span>Song</span></h1> 
@@ -30,7 +38,7 @@
           <button class="exitPopup" id="exitSettings" type="button">X</button>
           <div class="instructions">
             <h3 class="popup-title">INSTRUCTIONS</h3>
-            <p>HERE ARE INSTRUCTIONS ON HOW TO PLAY THE GAME AND YOU CAN PROBABLY JUST MIRROR HTIS FROM THE README OR MAKE IT BETTER IF YOU LIKE TO WRITE MORE</p>
+            <p>Game where player gets questions consisting of song lyrics and have to guess the song name and artist. Each question gets scored depending on number of hints revealed, number of guess attempts made, and time left on the clock. Player gets three lives - every question not answered correctly within the time limit costs the player one life. The game is over when the player runs out of lives.</p>
           </div>
           <div class="difficulty">
             <h3 class="popup-title">DIFFICULTY</h3>
@@ -123,5 +131,7 @@
   <script type="text/javascript" src="./js/leaderboard.js"></script>
   <!-- Link app.js -->
   <script type="text/javascript" src="./js/app.js"></script>
+  <!-- Link particles.js -->
+  <script type="text/javascript" src="./js/particles.js"></script>
 </body>
 </html>
