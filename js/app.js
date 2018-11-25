@@ -85,8 +85,33 @@ app.init = () => {
     game.startTimer();
   });
 
+  $("#settingsButton").on("click", () => {
+    $("#settingsPage").toggleClass("hide");
+    $("#exitSettings").focus();
+  });
+
+  $("#exitSettings").on("click", () => {
+    $("#settingsPage").toggleClass("hide");
+    $("#settingsButton").focus();
+  });
+
   $("#leaderboardButton").on("click", () => {
-    console.log(leaderboard.getTopFive());
+    $("#leaderboardPopup").toggleClass("hide");
+    $("#exitLeaderboard").focus();
+    
+    const topFivePlayers = leaderboard.getTopFive();
+
+    console.log(topFivePlayers);
+
+    topFivePlayers.forEach((entry, index) => {
+      app.printHTML("popup-entries", "p class=\"popup-entry\"", `${index + 1}) ${entry[0]} (Score: ${entry[1]})`);
+    });
+  });
+
+  $("#exitLeaderboard").on("click", () => {
+    $("#popup-entries").empty();
+    $("#leaderboardPopup").toggleClass("hide");
+    $("#leaderboardButton").focus();
   });
 
   $("#hintButton").on("click", () => {

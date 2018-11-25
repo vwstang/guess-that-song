@@ -32,20 +32,43 @@
         </section>
       </div>
     </section>
-    <article class="settingsPopUp hide">
-      <div class="wrapper">
-        <div id="exitSettings"></div>
-        <div class="instructions">
-          <h3>INSTRUCTIONS</h3>
-          <p>Game where player gets questions consisting of song lyrics and have to guess the song name and artist. Each question gets scored depending on number of hints revealed, number of guess attempts made, and time left on the clock. Player gets three lives - every question not answered correctly within the time limit costs the player one life. The game is over when the player runs out of lives.</p>
+    <article class="splashPopup hide" id="settingsPage">
+      <div class="overlay">
+        <div class="popup">
+          <button class="exitPopup" id="exitSettings" type="button">X</button>
+          <div class="instructions">
+            <h3 class="popup-title">INSTRUCTIONS</h3>
+            <p>Game where player gets questions consisting of song lyrics and have to guess the song name and artist. Each question gets scored depending on number of hints revealed, number of guess attempts made, and time left on the clock. Player gets three lives - every question not answered correctly within the time limit costs the player one life. The game is over when the player runs out of lives.</p>
+          </div>
+          <div class="difficulty">
+            <h3 class="popup-title">DIFFICULTY</h3>
+            <section class="difficultySelection">
+              <label for="easy">
+                <input id="easy" value="easy" type="radio" name="difficulty">
+                Easy
+              </label>
+              <label for="normal">
+                <input id="normal" value="normal" type="radio" name="difficulty" checked>
+                Normal
+              </label>
+              <label for="hard">
+                <input id="hard" value="hard" type="radio" name="difficulty">
+                Hard
+              </label>
+            </section>
+          </div>
         </div>
-        <h3>DIFFICULTY</h3>
-        <label for="easy">Easy</label>
-        <input id="easy" value="easy" type="radio" name="difficulty">
-        <label for="normal">Normal</label>
-        <input id="normal" value="normal" type="radio" name="difficulty" checked>
-        <label for="hard">Hard</label>
-        <input id="hard" value="hard" type="radio" name="difficulty">
+      </div>
+    </article>
+    <article class="splashPopup hide" id="leaderboardPopup">
+      <div class="overlay">
+        <div class="popup">
+          <button class="exitPopup" id="exitLeaderboard">X</button>
+          <h3 class="popup-title">Leaderboard</h3>
+          <div class="popup-entries" id="popup-entries">
+            <!-- DYNAMICALLY ADDED LEADERBOARD ELEMENTS -->
+          </div>
+        </div>
       </div>
     </article>
     <section id="gamePage" class="gamePage hide">
