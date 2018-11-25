@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,23 +9,22 @@
   <!-- font style -->
   <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans:400,800" rel="stylesheet">
   <!-- font awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    crossorigin="anonymous">
   <!-- stylesheet link -->
   <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
   <main>
     <!-- particles.js container -->
-    <div id="particles-js"></div>
-    
+    <div class="particles-js" id="particles-js"></div>
+
     <!-- stats - count particles -->
-    <div class="count-particles">
-      <span class="js-count-particles"></span>
-    </div>
 
     <section id="splashPage" class="splashPageTitle">
       <div class="wrapper wrapper--splash">
-        <h1 class="title"><span>Guess</span><span>That</span><span>Song</span></h1> 
+        <h1 class="title"><span>Guess</span><span>That</span><span>Song</span></h1>
         <section class="splashPageButtons">
           <button class="btn splashButton" id="startButton" type="button">Start Game</button>
           <button class="btn splashButton" id="settingsButton" type="button">Settings</button>
@@ -38,7 +38,10 @@
           <button class="exitPopup" id="exitSettings" type="button">X</button>
           <div class="instructions">
             <h3 class="popup-title">INSTRUCTIONS</h3>
-            <p>Game where player gets questions consisting of song lyrics and have to guess the song name and artist. Each question gets scored depending on number of hints revealed, number of guess attempts made, and time left on the clock. Player gets three lives - every question not answered correctly within the time limit costs the player one life. The game is over when the player runs out of lives.</p>
+            <p>Game where player gets questions consisting of song lyrics and have to guess the song name and artist.
+              Each question gets scored depending on number of hints revealed, number of guess attempts made, and time
+              left on the clock. Player gets three lives - every question not answered correctly within the time limit
+              costs the player one life. The game is over when the player runs out of lives.</p>
           </div>
           <div class="difficulty">
             <h3 class="popup-title">DIFFICULTY</h3>
@@ -76,14 +79,14 @@
         <ul>
           <li>
             <!-- Timer -->
-            <p class="timer" id= "timer"></p>
+            <p class="timer" id="timer"></p>
           </li>
           <li>
             <h2 class="titleLogo"><span>Guess</span><span>That</span><span>Song</span></h2>
           </li>
           <li>
             <!-- Exit Button -->
-            <button class="exitButton" id="exitButton" type="button">X</button>              
+            <button class="exitButton" id="exitButton" type="button">X</button>
           </li>
         </ul>
       </div>
@@ -98,13 +101,15 @@
           <div class="action">
             <form action="">
               <button class="btn btnGamePage" id="hintButton" type="button">HINT</button>
-              
+
               <label for="artistName">Artist Name</label>
-              <input id="artistName" class="artistName" name="artistName" type="text" placeholder="Artist Name" autocomplete="off">
-              
+              <input id="artistName" class="artistName" name="artistName" type="text" placeholder="Artist Name"
+                autocomplete="off">
+
               <label for="songTitle">Song Title</label>
-              <input id="songTitle" class="songTitle" name="songTitle" type="text" placeholder="Song Title" autocomplete="off">
-              
+              <input id="songTitle" class="songTitle" name="songTitle" type="text" placeholder="Song Title"
+                autocomplete="off">
+
               <section class="submitters">
                 <button class="btn btnGamePage" id="submitButton" type="submit">AM I RIGHT?!</button>
                 <button class="btn btnGamePage" id="passButton" type="button">PASS</button>
@@ -132,6 +137,14 @@
   <!-- Link app.js -->
   <script type="text/javascript" src="./js/app.js"></script>
   <!-- Link particles.js -->
-  <script type="text/javascript" src="./js/particles.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+  
+  <script>
+    particlesJS.load("particles-js", "particles.json", function () {
+      console.log('loaded')
+    });
+  </script>
 </body>
+
 </html>
