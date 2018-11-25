@@ -16,18 +16,49 @@
     justify-content: space-between;
   }
 
+  .title {
+    font-size: 10rem;
+  }
+
   .splashPageButtons {
     align-self: flex-end;
+  }
+
+  .wrapper {
+    height: 80vh;
+  }
+
+  .lyrics {
+    margin: 10rem 0 1rem 0;
+  }
+
+  .header {
+    font-size: $text-medium;
+
+    & .titleLogo {
+      font-size: $text-medium;
+    }
   }
 
 }
 
 @media (min-width: 660px) and (min-height: 600px) {
-  .splashPageTitle {
-    flex-direction: row;
-  }
+  // .splashPageTitle {
+  //   flex-direction: row;
+  // }
 }
 
-@media (min-width:801px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
-@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:801px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+
+}
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
+  // .title {
+  //   font-size: $guessThatGame-text;
+  //   display: flex;
+  //   flex-direction: row;
+  //   & span {
+  //     margin-right: 5rem;
+  //   }
+  // }
+}
 @media (min-width:1281px) { /* hi-res laptops and desktops */ }

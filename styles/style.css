@@ -192,8 +192,7 @@ h1 span {
 
 .gamePage {
   width: 100%;
-  height: 100%;
-  border: 1px solid tomato; }
+  height: 100%; }
 
 .header {
   position: absolute;
@@ -416,16 +415,19 @@ h1 span {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between; }
+  .title {
+    font-size: 10rem; }
   .splashPageButtons {
     -ms-flex-item-align: end;
-    align-self: flex-end; } }
-
-@media (min-width: 660px) and (min-height: 600px) {
-  .splashPageTitle {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row; } }
+    align-self: flex-end; }
+  .wrapper {
+    height: 80vh; }
+  .lyrics {
+    margin: 10rem 0 1rem 0; }
+  .header {
+    font-size: 3.2rem; }
+    .header .titleLogo {
+      font-size: 3.2rem; } }
 
 @media (min-width: 801px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */ }
@@ -435,6 +437,49 @@ h1 span {
 
 @media (min-width: 1281px) {
   /* hi-res laptops and desktops */ }
+
+canvas {
+  display: block;
+  vertical-align: bottom; }
+
+/* ---- particles.js container ---- */
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%; }
+
+/* ---- stats.js ---- */
+.count-particles {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 80px;
+  color: #13E8E9;
+  font-size: .8em;
+  text-align: left;
+  text-indent: 4px;
+  line-height: 14px;
+  padding-bottom: 2px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold; }
+
+.js-count-particles {
+  font-size: 1.1em; }
+
+#stats,
+.count-particles {
+  -webkit-user-select: none; }
+
+#stats {
+  border-radius: 3px 3px 0 0;
+  overflow: hidden; }
+
+.count-particles {
+  border-radius: 0 0 3px 3px; }
 
 .hide {
   display: none; }
