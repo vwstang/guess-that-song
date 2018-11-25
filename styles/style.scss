@@ -5,6 +5,8 @@
 @import "partials/headerTitle";
 @import "partials/gamePage";
 @import "partials/buttons";
-@import "partials/form";
 @import "partials/mediaQueries";
 
+.hide {
+  display: none;
+}

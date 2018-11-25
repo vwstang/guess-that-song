@@ -7,14 +7,21 @@ $gtsColor: #E0E1E5;
     --text-shadow: #0E1B23;
 }
 
-//font variables
+// Font variables
 $headFont: 'Fredoka One', cursive;
 $bodyFont: 'Open Sans', sans-serif;
 
 // Font-sizes
 $button-text:1rem;
-$primary-text:1.8rem;
+$primary-text:1.4rem;
+$primary-text-tablet: 1.8rem;
 $text-small: 2.4rem;
 $text-medium:3.2rem;
 $text-large: 4.2rem;
 $guessThatGame-text: 8rem;
+
+// Wrapper Sizes
+$wrapper-padding-mobile: 50px;
+
+// Buttons
+$button-width-mobile: 80%;

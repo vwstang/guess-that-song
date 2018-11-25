@@ -1,7 +1,19 @@
-h1 {
+.splashPageTitle {
+  height: 100vh;
+  
+  & .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.title {
     @include headerFont($guessThatGame-text, $gtsColor);
-    margin-top: 1rem;
-    margin-bottom: 15rem;
+    margin: 0;
+    font-size: 6rem;
 }
 
 h1 span {

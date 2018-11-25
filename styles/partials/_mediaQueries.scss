@@ -1,55 +1,33 @@
-@media (min-width:320px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
-    body {
-        // background: green;
+@media (min-width: 360px) and (min-height: 600px) { /* smartphones, Android phones, landscape iPhone */ 
+  body {
+    font-size: $primary-text-tablet;
+  }
 
-    }
+  .title {
+    font-size: 8rem;
+  }
 }
 
 
+@media (min-width: 600px) { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
+  .splashPageTitle .wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-
-
-@media (min-width:480px) { /* smartphones, Android phones, landscape iPhone */ 
-    // body {
-    //     background: yellow;
-    // }
-
-}
-@media (min-width:600px) { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
-    .wrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        border: 1px solid blue;
-    }
-
-    .splashPageTitle {
-        border: 1px solid red;
-        width: 50%;
-    }
-
-    .splashPageButtons {
-        border: 1px solid green;
-        width: 40%;
-    }
-
-
-
-    h1 {
-        @include fontSize(15);
-        margin-left: -3rem;
-    }
-
-    form {
-        flex-direction: row;
-}
-
-    .artistName, .songTitle {
-        margin: 2.5rem .5rem;
+  .splashPageButtons {
+    align-self: flex-end;
+  }
 
 }
 
+@media (min-width: 660px) and (min-height: 600px) {
+  .splashPageTitle {
+    flex-direction: row;
+  }
 }
+
 @media (min-width:801px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
 @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
 @media (min-width:1281px) { /* hi-res laptops and desktops */ }

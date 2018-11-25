@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Guess That Song</title>
-
   <!-- font style -->
   <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans:400,800" rel="stylesheet">
   <!-- font awesome -->
@@ -13,72 +12,76 @@
   <!-- stylesheet link -->
   <link rel="stylesheet" href="styles/style.css">
 </head>
-
 <body>
-  <main class="wrapper">
+  <main>
     <section id="splashPage" class="splashPageTitle">
-      <h1 class="title"><span>Guess</span><span>That</span><span>Song</span></h1> 
-      <section class="splashPageButtons">
-        <button class="btn startButton" id="startButton" type="button"><p>Start Game</p></button>
-        <button class="btn settingButton" id="settingsButton" type="button"><p>Settings</p></button>
-        <button class="btn leaderboardButton" id="leaderboardButton" type="button"><p>Leaderboard</p></button>
-      </section>
-    </section>
-
-    <article class="settingsPopUp hide">
-      <div id="exitSettings"></div>
-      <div class="instructions">
-        <h3>INSTRUCTIONS</h3>
-        <p>HERE ARE INSTRUCTIONS ON HOW TO PLAY THE GAME AND YOU CAN PROBABLY JUST MIRROR HTIS FROM THE README OR MAKE IT BETTER IF YOU LIKE TO WRITE MORE</p>
+      <div class="wrapper wrapper--splash">
+        <h1 class="title"><span>Guess</span><span>That</span><span>Song</span></h1> 
+        <section class="splashPageButtons">
+          <button class="btn splashButton" id="startButton" type="button">Start Game</button>
+          <button class="btn splashButton" id="settingsButton" type="button">Settings</button>
+          <button class="btn splashButton" id="leaderboardButton" type="button">Leaderboard</button>
+        </section>
       </div>
-      <h3>DIFFICULTY</h3>
-      <label for="easy">Easy</label>
-      <input id="easy" value="easy" type="radio" name="difficulty">
-      <label for="normal">Normal</label>
-      <input id="normal" value="normal" type="radio" name="difficulty" checked>
-      <label for="hard">Hard</label>
-      <input id="hard" value="hard" type="radio" name="difficulty">
+    </section>
+    <article class="settingsPopUp hide">
+      <div class="wrapper">
+        <div id="exitSettings"></div>
+        <div class="instructions">
+          <h3>INSTRUCTIONS</h3>
+          <p>HERE ARE INSTRUCTIONS ON HOW TO PLAY THE GAME AND YOU CAN PROBABLY JUST MIRROR HTIS FROM THE README OR MAKE IT BETTER IF YOU LIKE TO WRITE MORE</p>
+        </div>
+        <h3>DIFFICULTY</h3>
+        <label for="easy">Easy</label>
+        <input id="easy" value="easy" type="radio" name="difficulty">
+        <label for="normal">Normal</label>
+        <input id="normal" value="normal" type="radio" name="difficulty" checked>
+        <label for="hard">Hard</label>
+        <input id="hard" value="hard" type="radio" name="difficulty">
+      </div>
     </article>
     <section id="gamePage" class="gamePage hide">
       <div class="header">
         <ul>
           <li>
             <!-- Timer -->
-            <p class= "timer" id= "timer"></p>
-
+            <p class="timer" id= "timer"></p>
           </li>
           <li>
             <h2 class="titleLogo"><span>Guess</span><span>That</span><span>Song</span></h2>
           </li>
           <li>
             <!-- Exit Button -->
-            <button class="btn btnGamePage exitButton" id="exitButton" type="button"> <p>GET ME OUTTA HERE</p> </button>              
+            <button class="exitButton" id="exitButton" type="button">X</button>              
           </li>
         </ul>
       </div>
-      <div class="lyrics" id="lyrics">
-        <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
+      <div class="gameContainer">
+        <div class="wrapper">
+          <div class="lyrics" id="lyrics">
+            <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
+          </div>
+          <section id="status">
+            <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
+          </section>
+          <div class="action">
+            <form action="">
+              <button class="btn btnGamePage" id="hintButton" type="button">HINT</button>
+              
+              <label for="artistName">Artist Name</label>
+              <input id="artistName" class="artistName" name="artistName" type="text" placeholder="Artist Name" autocomplete="off">
+              
+              <label for="songTitle">Song Title</label>
+              <input id="songTitle" class="songTitle" name="songTitle" type="text" placeholder="Song Title" autocomplete="off">
+              
+              <section class="submitters">
+                <button class="btn btnGamePage" id="submitButton" type="submit">AM I RIGHT?!</button>
+                <button class="btn btnGamePage" id="passButton" type="button">PASS</button>
+              </section>
+            </form>
+          </div>
+        </div>
       </div>
-      
-      <form action="">
-        <button class="btn btnGamePage hintButton" id="hintButton" type="button"><p>GIVE ME HINT JERK</p></button>
-        
-        <label for="artistName">Artist Name</label>
-        <input id="artistName" class="artistName" name="artistName" type="text" placeholder="Artist Name" autocomplete="off">
-        
-        <label for="songTitle">Song Title</label>
-        <input id="songTitle" class="songTitle" name="songTitle" type="text" placeholder="Song Title" autocomplete="off">
-        
-        
-        <button class="btn btnGamePage submitButton" id="submitButton" type="submit"> <p>AM I RIGHT?!</p></button>
-
-      </form>
-      <div class="centerButton">
-        <button class="btn btnGamePage passButton" id="passButton" type="button"> <p>PASS</p></button>
-      </div>
-      <section id="status">
-        <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
-      </section>
     </section>
   </main>
   <!-- Link jQuery -->
