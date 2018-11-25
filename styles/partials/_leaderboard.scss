@@ -1,0 +1,66 @@
+.splashPopup {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  & .overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    min-width: 320px;
+    height: 100vh;
+    min-height: 480px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10% 20px;
+
+    & .popup {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      max-width: 600px;
+      padding: 20px;
+      background: whitesmoke;
+      border-radius: 10px;
+
+      &-title {
+        margin: 0;
+      }
+
+      &-entries {
+        width: 100%;
+        margin: auto 0;
+      }
+
+      .instructions p {
+        margin: 2rem 0;
+      }
+
+      .difficulty {
+        width: 100%;
+
+        & .difficultySelection {
+          margin-top: 2rem;
+          
+          & label {
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.exitPopup {
+  position: absolute;
+  top: -1em;
+  right: -1em;
+  width: 2em;
+  height: 2em;
+  line-height: 1em;
+  border: 1px solid dimgray;
+  border-radius: 50%;
+  font-weight: bold;
+}
