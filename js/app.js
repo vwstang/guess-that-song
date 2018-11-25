@@ -142,4 +142,3 @@ $(() => {
   // For Development Purposes ONLY
   // apiRequest.getLyricsIDList();
 });
-
