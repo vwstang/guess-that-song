@@ -228,7 +228,11 @@ h1 span {
       max-width: 600px;
       padding: 20px;
       background: whitesmoke;
-      border-radius: 10px; }
+      border-radius: 10px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none; }
       .splashPopup .overlay .popup-title {
         margin: 0; }
       .splashPopup .overlay .popup-entries {
