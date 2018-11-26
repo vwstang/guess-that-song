@@ -370,12 +370,15 @@ h1 span {
   .lyrics p {
     margin: 0.5em; }
 
-#status {
+.status {
   height: 1.4rem;
   margin-top: 10px; }
-  #status p {
-    margin: 0;
-    color: red; }
+  .status p {
+    margin: 0; }
+    .status p.correct {
+      color: green; }
+    .status p.incorrect {
+      color: red; }
 
 .action {
   width: 100%;
