@@ -24,7 +24,10 @@
 
     <section id="splashPage" class="splashPageTitle">
       <div class="wrapper wrapper--splash">
-        <h1 class="title"><span>Guess</span><span>That</span><span>Song</span></h1>
+        <div class="ball" onmouseover="PlaySound('my-sound')" onmouseout="StopSound('my-sound')">
+          <h1 class="title"><span>Guess</span><span>That</span><span>Song</span></h1>
+          <audio id='my-sound' src="assets/guessThatSong.mp3" />
+        </div>
         <section class="splashPageButtons">
           <button class="btn splashButton" id="startButton" type="button">Start Game</button>
           <button class="btn splashButton" id="settingsButton" type="button">Settings</button>
@@ -139,7 +142,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
   
   <script>
-    particlesJS.load("particles-js", "particles.json", function () {
+    particlesJS.load("particles-js", "js/particles.json", function () {
       console.log('loaded')
     });
   </script>
