@@ -84,12 +84,20 @@
   }
 }
 
-#status {
+.status {
   height: $primary-text;
   margin-top: 10px;
+
   & p {
     margin: 0;
-    color: red;
+    
+    &.correct {
+      color: green;
+    }
+
+    &.incorrect {
+      color: red;
+    }
   }
 }
 

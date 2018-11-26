@@ -199,6 +199,7 @@ game.answerCheck = () => {
   const userTrack = $("#songTitle").val();
   if (game.currAnswerArtist.test(userArtist) && game.currAnswerTrack.test(userTrack)) {
     console.log("Correct!"); // 
+    game.updateStatus("Correct! Good job!", "correct");
     // RUN UPDATE SCORE METHOD
     game.updateScore();
     game.resetQuestion();
@@ -207,13 +208,16 @@ game.answerCheck = () => {
     console.log("WRONG!");
     game.currAttemptCount++;
     console.log(game.currAttemptCount);
-    game.updateStatus();
+    game.updateStatus("Wrong, try again!", "incorrect");
   }
 }
 
-game.updateStatus = () => {
+game.updateStatus = (response, status) => {
   $("#status").empty();
-  app.printHTML("status", "p", "Wrong, try again!");
+  app.printHTML("status", `p class="${status}"`, response);
+  setTimeout(() => {
+    $("#status").empty();
+  },3000);
 }
 
 game.updateScore = () => {
@@ -256,7 +260,6 @@ game.updateScore = () => {
 game.resetQuestion = () => {
   // Empty the HTML tags that show user input values, status and hints!
   $("#lyrics").empty();
-  $("#status").empty();
   $("#artistName").val("");
   $("#songTitle").val("");
 
@@ -280,6 +283,8 @@ game.resetGame = () => {
 game.endGame = () => {
   // Clear the interval
   clearInterval(game.counter);
+
+  alert(`Time's up! Your score is ${game.totalScore}.`);
 
   const playerName = prompt("Enter your name, you magical lyricist:") || "Wild Jigglypuff";
 
