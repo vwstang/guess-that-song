@@ -5,8 +5,11 @@
 - Vincent Tang ([GitHub](github.com/vwstang))
 
 This branch contains our final submission for Project 4 and will not be updated going forward aside from this readme.
+
 This will be used as a comparison between further updates and what we were able to accomplish within the one-week turnaround for the project.
-\
+
+&NewLine;
+&NewLine;
 
 ## Summary
 Game where player gets questions consisting of song lyrics and have to guess the song name and artist.
