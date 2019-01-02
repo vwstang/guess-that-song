@@ -6,5 +6,5 @@ Each question gets scored depending on number of hints (lines of lyrics) reveale
 The leaderboard can be viewed from the home screen.
 
 ## Contributors
-- Vincent Tang ([Website](tangible.codes), [GitHub](github.com/vwstang))
-- Anne Phitsanoukanh ([GitHub](github.com/annephits))
+- Vincent Tang ([Website](http://tangible.codes), [GitHub](https://github.com/vwstang))
+- Anne Phitsanoukanh ([GitHub](https://github.com/annephits))
