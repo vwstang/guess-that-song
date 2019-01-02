@@ -1,11 +1,12 @@
 # Guess That Song
 ### HackerYou Fall 2018 FT Bootcamp Project 4
-###### Contributors:
-- Anne Phitsanoukanh (github.com/annephits)
-- Vincent Tang (github.com/vwstang)
+##### Contributors:
+- Anne Phitsanoukanh ([GitHub](github.com/annephits))
+- Vincent Tang ([GitHub](github.com/vwstang))
 
 This branch contains our final submission for Project 4 and will not be updated going forward aside from this readme.
 This will be used as a comparison between further updates and what we were able to accomplish within the one-week turnaround for the project.
+\
 
 ## Summary
 Game where player gets questions consisting of song lyrics and have to guess the song name and artist.
