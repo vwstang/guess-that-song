@@ -101,7 +101,7 @@ app.init = () => {
     
     const topFivePlayers = leaderboard.getTopFive();
 
-    console.log(topFivePlayers);
+    // console.log(topFivePlayers);
 
     topFivePlayers.forEach((entry, index) => {
       app.printHTML("popup-entries", "p class=\"popup-entry\"", `${index + 1}) ${entry[0]} (Score: ${entry[1]})`);
@@ -136,7 +136,7 @@ $(() => {
   // Save the leaderboard on value updates
   leaderboard.db.on("value", dbSnapshot => {
     leaderboard.snapshot = dbSnapshot.val();
-    console.log(leaderboard.snapshot);
+    // console.log(leaderboard.snapshot);
   });
 
   // For Development Purposes ONLY

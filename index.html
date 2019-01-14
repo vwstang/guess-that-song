@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
   <title>Guess That Song</title>
   <!-- font style -->
   <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans:400,800" rel="stylesheet">
@@ -17,11 +18,6 @@
 
 <body>
   <main>
-    <!-- particles.js container -->
-    <div class="particles-js" id="particles-js"></div>
-
-    <!-- stats - count particles -->
-
     <section id="splashPage" class="splashPageTitle">
       <div class="wrapper wrapper--splash">
         <div class="ball" onmouseover="PlaySound('my-sound')" onmouseout="StopSound('my-sound')">
@@ -125,27 +121,17 @@
   </main>
   <!-- Link jQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Link Sweet Alerts -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <!-- Usage tracking required by musixmatch API -->
   <script type="text/javascript" src="http://tracking.musixmatch.com/t1.0/AMa6hJCIEzn1v8RuOP"></script>
   <!-- Link Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-  <!-- Link data.js -->
+  <!-- Link JavaScript files -->
   <script type="text/javascript" src="./js/data.js"></script>
-  <!-- Link game.js -->
   <script type="text/javascript" src="./js/game.js"></script>
-  <!-- Link leaderboard.js-->
   <script type="text/javascript" src="./js/leaderboard.js"></script>
-  <!-- Link app.js -->
   <script type="text/javascript" src="./js/app.js"></script>
-  <!-- Link particles.js -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-  
-  <script>
-    particlesJS.load("particles-js", "js/particles.json", function () {
-      console.log('loaded')
-    });
-  </script>
 </body>
 
 </html>

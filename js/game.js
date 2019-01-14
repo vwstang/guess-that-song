@@ -99,8 +99,8 @@ game.getQuestion = () => {
     game.currQuestion = game.generateQuestion(game.currLyrics);
 
     // FOR DEBUGGING PURPOSES
-    console.log(game.currLyrics);
-    console.log(game.currQuestion);
+    // console.log(game.currLyrics);
+    // console.log(game.currQuestion);
 
     // Print one line of the question lyrics to the DOM.
     app.printHTML("lyrics", "p", game.currQuestion.shift());
@@ -177,7 +177,7 @@ game.displayTime = () => {
   app.printHTML("timer", "span", strTime);
 
   // For debugging purposes
-  console.log(game.currTime);
+  // console.log(game.currTime);
 }
 
 //==-- METHOD: timer --==//
@@ -283,25 +283,35 @@ game.resetGame = () => {
 game.endGame = () => {
   // Clear the interval
   clearInterval(game.counter);
-
-  alert(`Time's up! Your score is ${game.totalScore}.`);
-
-  const playerName = prompt("Enter your name, you magical lyricist:") || "Wild Jigglypuff";
-
-  // For debugging purposes
-  console.log(`${playerName}'s total score is: ${game.totalScore}`);
   
-  // FIREBASE STORAGE OF PLAYER SCORE
-  const scoreEntry = {
-    name: playerName,
-    score: game.totalScore
-  }
+  swal({
+    title: "Time's up!",
+    text: `Your total score is ${game.totalScore}.`,
+    content: {
+      element: "input",
+      attributes: {
+        placeholder: "Your name, you magical lyricist!"
+      },
+    },
+    button: "Submit",
+    closeOnClickOutside: false
+  }).then(playerName => {
+    if (!playerName) {
+      playerName = "Wild Jigglypuff";
+    }
+    // FIREBASE STORAGE OF PLAYER SCORE
+    const scoreEntry = {
+      name: playerName,
+      score: game.totalScore
+    }
+    
+    leaderboard.db.push(scoreEntry);
+    
+    // Reset the game and then go back to the home page
+    game.resetGame();
   
-  leaderboard.db.push(scoreEntry);
-  
-  // Reset the game and then go back to the home page
-  game.resetGame();
+    $("#gamePage").toggleClass("hide");
+    $("#splashPage").toggleClass("hide");
+  });
 
-  $("#gamePage").toggleClass("hide");
-  $("#splashPage").toggleClass("hide");
 }
