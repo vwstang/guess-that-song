@@ -5,7 +5,7 @@ const config = {
   databaseURL: "https://guess-that-song-74bf9.firebaseio.com",
   projectId: "guess-that-song-74bf9",
   storageBucket: "guess-that-song-74bf9.appspot.com",
-  messagingSenderId: "206951474105"
+  messagingSenderId: "206951474105",
 };
 
 firebase.initializeApp(config);
@@ -15,21 +15,23 @@ firebase.initializeApp(config);
 const leaderboard = {
   db: firebase.database().ref(),
   snapshot: [],
-  topFive: []
+  topFive: [],
 };
 
 leaderboard.getTopFive = () => {
-  // Make a new array 
+  // Make a new array
   let arrSnapshot = [];
 
   for (let entry in leaderboard.snapshot) {
-    arrSnapshot.push([leaderboard.snapshot[entry].name, leaderboard.snapshot[entry].score]);
+    arrSnapshot.push([
+      leaderboard.snapshot[entry].name,
+      leaderboard.snapshot[entry].score,
+    ]);
   }
 
   // Sort the array in descending order
   arrSnapshot.sort((a, b) => b[1] - a[1]);
-  
+
   // Return the top 5 scores and their player names
   return arrSnapshot.slice(0, 5);
-}
-
+};

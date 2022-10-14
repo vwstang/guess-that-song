@@ -1,137 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" type="image/png" href="./assets/favicon.png" />
+    <title>Guess That Song</title>
+    <!-- font style -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans:400,800"
+      rel="stylesheet"
+    />
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
+    <!-- stylesheet link -->
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="icon" type="image/png" href="./assets/favicon.png">
-  <title>Guess That Song</title>
-  <!-- font style -->
-  <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans:400,800" rel="stylesheet">
-  <!-- font awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-    crossorigin="anonymous">
-  <!-- stylesheet link -->
-  <link rel="stylesheet" href="styles/style.css">
-</head>
-
-<body>
-  <main>
-    <section id="splashPage" class="splashPageTitle">
-      <div class="wrapper wrapper--splash">
-        <div class="ball" onmouseover="PlaySound('my-sound')" onmouseout="StopSound('my-sound')">
-          <h1 class="title"><span>Guess</span><span>That</span><span>Song</span></h1>
-          <audio id='my-sound' src="assets/guessThatSong.mp3" />
-        </div>
-        <section class="splashPageButtons">
-          <button class="btn splashButton" id="startButton" type="button">Start Game</button>
-          <button class="btn splashButton" id="settingsButton" type="button">Settings</button>
-          <button class="btn splashButton" id="leaderboardButton" type="button">Leaderboard</button>
-        </section>
-      </div>
-    </section>
-    <article class="splashPopup hide" id="settingsPage">
-      <div class="overlay">
-        <div class="popup">
-          <button class="exitPopup" id="exitSettings" type="button">X</button>
-          <div class="instructions">
-            <h3 class="popup-title">INSTRUCTIONS</h3>
-            <p>Game where player gets questions consisting of song lyrics and have to guess the song name and artist.
-              Each question gets scored depending on number of hints revealed, number of guess attempts made, and time
-              left on the clock. Player gets three lives - every question not answered correctly within the time limit
-              costs the player one life. The game is over when the player runs out of lives.</p>
+  <body>
+    <main>
+      <section id="splashPage" class="splashPageTitle">
+        <div class="wrapper wrapper--splash">
+          <div
+            class="ball"
+            onmouseover="PlaySound('my-sound')"
+            onmouseout="StopSound('my-sound')"
+          >
+            <h1 class="title">
+              <span>Guess</span><span>That</span><span>Song</span>
+            </h1>
+            <audio id="my-sound" src="assets/guessThatSong.mp3" />
           </div>
-          <div class="difficulty">
-            <h3 class="popup-title">DIFFICULTY</h3>
-            <section class="difficultySelection">
-              <label for="easy">
-                <input id="easy" value="easy" type="radio" name="difficulty">
-                Easy
-              </label>
-              <label for="normal">
-                <input id="normal" value="normal" type="radio" name="difficulty" checked>
-                Normal
-              </label>
-              <label for="hard">
-                <input id="hard" value="hard" type="radio" name="difficulty">
-                Hard
-              </label>
-            </section>
-          </div>
-        </div>
-      </div>
-    </article>
-    <article class="splashPopup hide" id="leaderboardPopup">
-      <div class="overlay">
-        <div class="popup">
-          <button class="exitPopup" id="exitLeaderboard">X</button>
-          <h3 class="popup-title">Leaderboard</h3>
-          <div class="popup-entries" id="popup-entries">
-            <!-- DYNAMICALLY ADDED LEADERBOARD ELEMENTS -->
-          </div>
-        </div>
-      </div>
-    </article>
-    <section id="gamePage" class="gamePage hide">
-      <div class="header">
-        <ul>
-          <li>
-            <!-- Timer -->
-            <p class="timer" id="timer"></p>
-          </li>
-          <li>
-            <h2 class="titleLogo"><span>Guess</span><span>That</span><span>Song</span></h2>
-          </li>
-          <li>
-            <!-- Exit Button -->
-            <button class="exitButton" id="exitButton" type="button">X</button>
-          </li>
-        </ul>
-      </div>
-      <div class="gameContainer">
-        <div class="wrapper">
-          <div class="lyrics" id="lyrics">
-            <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
-          </div>
-          <section class="status" id="status">
-            <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
+          <section class="splashPageButtons">
+            <button class="btn splashButton" id="startButton" type="button">
+              Start Game
+            </button>
+            <button class="btn splashButton" id="settingsButton" type="button">
+              Settings
+            </button>
+            <button
+              class="btn splashButton"
+              id="leaderboardButton"
+              type="button"
+            >
+              Leaderboard
+            </button>
           </section>
-          <div class="action">
-            <form action="">
-              <button class="btn btnGamePage" id="hintButton" type="button">HINT</button>
-
-              <label for="artistName">Artist Name</label>
-              <input id="artistName" class="artistName" name="artistName" type="text" placeholder="Artist Name"
-                autocomplete="off">
-
-              <label for="songTitle">Song Title</label>
-              <input id="songTitle" class="songTitle" name="songTitle" type="text" placeholder="Song Title"
-                autocomplete="off">
-
-              <section class="submitters">
-                <button class="btn btnGamePage" id="submitButton" type="submit">AM I RIGHT?!</button>
-                <button class="btn btnGamePage" id="passButton" type="button">PASS</button>
+        </div>
+      </section>
+      <article class="splashPopup hide" id="settingsPage">
+        <div class="overlay">
+          <div class="popup">
+            <button class="exitPopup" id="exitSettings" type="button">X</button>
+            <div class="instructions">
+              <h3 class="popup-title">INSTRUCTIONS</h3>
+              <p>
+                Game where player gets questions consisting of song lyrics and
+                have to guess the song name and artist. Each question gets
+                scored depending on number of hints revealed, number of guess
+                attempts made, and time left on the clock. Player gets three
+                lives - every question not answered correctly within the time
+                limit costs the player one life. The game is over when the
+                player runs out of lives.
+              </p>
+            </div>
+            <div class="difficulty">
+              <h3 class="popup-title">DIFFICULTY</h3>
+              <section class="difficultySelection">
+                <label for="easy">
+                  <input
+                    id="easy"
+                    value="easy"
+                    type="radio"
+                    name="difficulty"
+                  />
+                  Easy
+                </label>
+                <label for="normal">
+                  <input
+                    id="normal"
+                    value="normal"
+                    type="radio"
+                    name="difficulty"
+                    checked
+                  />
+                  Normal
+                </label>
+                <label for="hard">
+                  <input
+                    id="hard"
+                    value="hard"
+                    type="radio"
+                    name="difficulty"
+                  />
+                  Hard
+                </label>
               </section>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
-  <!-- Link jQuery -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!-- Link Sweet Alerts -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-  <!-- Usage tracking required by musixmatch API -->
-  <script type="text/javascript" src="http://tracking.musixmatch.com/t1.0/AMa6hJCIEzn1v8RuOP"></script>
-  <!-- Link Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-  <!-- Link JavaScript files -->
-  <script type="text/javascript" src="./js/data.js"></script>
-  <script type="text/javascript" src="./js/game.js"></script>
-  <script type="text/javascript" src="./js/leaderboard.js"></script>
-  <script type="text/javascript" src="./js/app.js"></script>
-</body>
+      </article>
+      <article class="splashPopup hide" id="leaderboardPopup">
+        <div class="overlay">
+          <div class="popup">
+            <button class="exitPopup" id="exitLeaderboard">X</button>
+            <h3 class="popup-title">Leaderboard</h3>
+            <div class="popup-entries" id="popup-entries">
+              <!-- DYNAMICALLY ADDED LEADERBOARD ELEMENTS -->
+            </div>
+          </div>
+        </div>
+      </article>
+      <section id="gamePage" class="gamePage hide">
+        <div class="header">
+          <ul>
+            <li>
+              <!-- Timer -->
+              <p class="timer" id="timer"></p>
+            </li>
+            <li>
+              <h2 class="titleLogo">
+                <span>Guess</span><span>That</span><span>Song</span>
+              </h2>
+            </li>
+            <li>
+              <!-- Exit Button -->
+              <button class="exitButton" id="exitButton" type="button">
+                X
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="gameContainer">
+          <div class="wrapper">
+            <div class="lyrics" id="lyrics">
+              <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
+            </div>
+            <section class="status" id="status">
+              <!-- DYNAMICALLY GENERATED STATUS SHOULD GO HERE -->
+            </section>
+            <div class="action">
+              <form action="">
+                <button class="btn btnGamePage" id="hintButton" type="button">
+                  HINT
+                </button>
 
+                <label for="artistName">Artist Name</label>
+                <input
+                  id="artistName"
+                  class="artistName"
+                  name="artistName"
+                  type="text"
+                  placeholder="Artist Name"
+                  autocomplete="off"
+                />
+
+                <label for="songTitle">Song Title</label>
+                <input
+                  id="songTitle"
+                  class="songTitle"
+                  name="songTitle"
+                  type="text"
+                  placeholder="Song Title"
+                  autocomplete="off"
+                />
+
+                <section class="submitters">
+                  <button
+                    class="btn btnGamePage"
+                    id="submitButton"
+                    type="submit"
+                  >
+                    AM I RIGHT?!
+                  </button>
+                  <button class="btn btnGamePage" id="passButton" type="button">
+                    PASS
+                  </button>
+                </section>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Link jQuery -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    ></script>
+    <!-- Link Sweet Alerts -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+    ></script>
+    <!-- Usage tracking required by musixmatch API -->
+    <script
+      type="text/javascript"
+      src="http://tracking.musixmatch.com/t1.0/AMa6hJCIEzn1v8RuOP"
+    ></script>
+    <!-- Link Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+    <!-- Link JavaScript files -->
+    <script type="text/javascript" src="./js/data.js"></script>
+    <script type="text/javascript" src="./js/game.js"></script>
+    <script type="text/javascript" src="./js/leaderboard.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+  </body>
 </html>

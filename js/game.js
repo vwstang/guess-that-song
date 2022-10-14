@@ -4,12 +4,12 @@ const game = {
   currTrackID: 0,
   currLyrics: [],
   currQuestion: [],
-  currAnswerArtist: '',
-  currAnswerTrack: '',
+  currAnswerArtist: "",
+  currAnswerTrack: "",
   currAttemptCount: 0,
   currTime: 0,
   totalScore: 0,
-  difficultyLevel: $('input[name=difficulty]:checked').val(),
+  difficultyLevel: $("input[name=difficulty]:checked").val(),
 };
 
 //== METHOD: startQuestion ==//
@@ -33,20 +33,19 @@ game.getRandomSong = (objSongLibrary) => {
 // Send AJAX request to musixmatch API with a track_id to obtain track information (i.e. song name and artist). When the request is completed, convert the response strings to regular expressions (performed in game.toRegEx()) and go get the question (performed in game.getQuestion()).
 // Called from game.startQuestion()
 game.getAnswer = () => {
-  $.when(apiRequest.getTrack(game.currTrackID))
-    .then((res) => {
-      // For debugging purposes
-      console.log(
-        `Artist: ${res.message.body.track.artist_name}, Song: ${res.message.body.track.track_name}`
-      );
+  $.when(apiRequest.getTrack(game.currTrackID)).then((res) => {
+    // For debugging purposes
+    console.log(
+      `Artist: ${res.message.body.track.artist_name}, Song: ${res.message.body.track.track_name}`
+    );
 
-      // Convert the response strings to regular expressions
-      game.currAnswerArtist = game.toRegEx(res.message.body.track.artist_name);
-      game.currAnswerTrack = game.toRegEx(res.message.body.track.track_name);
+    // Convert the response strings to regular expressions
+    game.currAnswerArtist = game.toRegEx(res.message.body.track.artist_name);
+    game.currAnswerTrack = game.toRegEx(res.message.body.track.track_name);
 
-      // Got answers? Good, go get the question now.
-      game.getQuestion();
-    });
+    // Got answers? Good, go get the question now.
+    game.getQuestion();
+  });
 };
 
 //==-- METHOD: toRegEx --==//
@@ -62,7 +61,7 @@ game.toRegEx = (strArtistOrSong) => {
   const lowercaseZ = 122;
 
   // The accumulator variable
-  let strRegEx = '';
+  let strRegEx = "";
 
   // First, edit the string so non-alphabet characters within the song/artist name are optional in the regex (i.e. ?)
   for (let i = 0; i < lowercaseString.length; i++) {
@@ -74,13 +73,13 @@ game.toRegEx = (strArtistOrSong) => {
     ) {
       strRegEx += lowercaseString[i];
     } else {
-      strRegEx += lowercaseString[i] + '?';
+      strRegEx += lowercaseString[i] + "?";
     }
   }
 
   // Second, trim the string for any instances of "ft." or "feat."
-  const featIndex = strRegEx.indexOf('feat.');
-  const ftIndex = strRegEx.indexOf('ft.');
+  const featIndex = strRegEx.indexOf("feat.");
+  const ftIndex = strRegEx.indexOf("ft.");
   const nonExistent = -1;
 
   if (featIndex !== nonExistent) {
@@ -90,7 +89,7 @@ game.toRegEx = (strArtistOrSong) => {
   }
 
   // Lastly, return the string as a Regular Expression that is case insensitive.
-  return new RegExp(`^${strRegEx}$`, 'i');
+  return new RegExp(`^${strRegEx}$`, "i");
 };
 
 //== METHOD: getQuestion ==//
@@ -100,7 +99,7 @@ game.getQuestion = () => {
   $.when(apiRequest.getLyrics(game.currTrackID)).then((res) => {
     // Select the lyrics within the response from the AJAX request, convert it into an array (by splitting the string up by new line characters), clean up the lyrics for API disclaimer text (performed in game.cleanLyrics()) and store it into the game object's currLyrics property.
     game.currLyrics = game.cleanLyrics(
-      res.message.body.lyrics.lyrics_body.split('\n')
+      res.message.body.lyrics.lyrics_body.split("\n")
     );
 
     // Next step is to randomly pick three lines within the full currLyrics and store them into a separate array (performed in game.generateQuestion()).
@@ -111,7 +110,7 @@ game.getQuestion = () => {
     // console.log(game.currQuestion);
 
     // Print one line of the question lyrics to the DOM.
-    app.printHTML('lyrics', 'p', game.currQuestion.shift());
+    app.printHTML("lyrics", "p", game.currQuestion.shift());
   });
 };
 
@@ -120,9 +119,9 @@ game.getQuestion = () => {
 game.cleanLyrics = (arrLyrics) => {
   let tempArray = [];
   for (let i = 0; i < arrLyrics.length; i++) {
-    if (arrLyrics[i] === '...') {
+    if (arrLyrics[i] === "...") {
       i = arrLyrics.length;
-    } else if (arrLyrics[i] === '') {
+    } else if (arrLyrics[i] === "") {
       i = i;
     } else {
       tempArray.push(arrLyrics[i]);
@@ -144,17 +143,17 @@ game.generateQuestion = (arrCleanLyrics) => {
 game.startTimer = () => {
   // Set the game timer depending on the difficulty level. Default case should NEVER be run.
   switch (game.difficultyLevel) {
-    case 'easy':
+    case "easy":
       game.currTime = 90;
       break;
-    case 'normal':
+    case "normal":
       game.currTime = 60;
       break;
-    case 'hard':
+    case "hard":
       game.currTime = 30;
       break;
     default:
-      alert('How did you manage to break the difficulty setting...');
+      alert("How did you manage to break the difficulty setting...");
       break;
   }
 
@@ -181,8 +180,8 @@ game.displayTime = () => {
     strTime = `0:${game.currTime}`;
   }
 
-  $('#timer').empty();
-  app.printHTML('timer', 'span', strTime);
+  $("#timer").empty();
+  app.printHTML("timer", "span", strTime);
 
   // For debugging purposes
   // console.log(game.currTime);
@@ -203,31 +202,31 @@ game.timer = () => {
 //==-- METHOD: answerCheck --==//
 
 game.answerCheck = () => {
-  const userArtist = $('#artistName').val();
-  const userTrack = $('#songTitle').val();
+  const userArtist = $("#artistName").val();
+  const userTrack = $("#songTitle").val();
   if (
     game.currAnswerArtist.test(userArtist) &&
     game.currAnswerTrack.test(userTrack)
   ) {
-    console.log('Correct!'); //
-    game.updateStatus('Correct! Good job!', 'correct');
+    console.log("Correct!"); //
+    game.updateStatus("Correct! Good job!", "correct");
     // RUN UPDATE SCORE METHOD
     game.updateScore();
     game.resetQuestion();
     game.startQuestion();
   } else {
-    console.log('WRONG!');
+    console.log("WRONG!");
     game.currAttemptCount++;
     console.log(game.currAttemptCount);
-    game.updateStatus('Wrong, try again!', 'incorrect');
+    game.updateStatus("Wrong, try again!", "incorrect");
   }
 };
 
 game.updateStatus = (response, status) => {
-  $('#status').empty();
-  app.printHTML('status', `p class="${status}"`, response);
+  $("#status").empty();
+  app.printHTML("status", `p class="${status}"`, response);
   setTimeout(() => {
-    $('#status').empty();
+    $("#status").empty();
   }, 3000);
 };
 
@@ -235,23 +234,23 @@ game.updateScore = () => {
   let baseScore, timeScoreBonus, hintScoreReducer, incorrectReducer;
 
   switch (game.difficultyLevel) {
-    case 'easy':
+    case "easy":
       baseScore = 300;
       hintScoreReducer = -25;
       incorrectReducer = -10;
       break;
-    case 'normal':
+    case "normal":
       baseScore = 500;
       hintScoreReducer = -50;
       incorrectReducer = -20;
       break;
-    case 'hard':
+    case "hard":
       baseScore = 700;
       hintScoreReducer = -75;
       incorrectReducer = -30;
       break;
     default:
-      alert('You managed to break the difficulty level AGAIN??? (updateScore)');
+      alert("You managed to break the difficulty level AGAIN??? (updateScore)");
       break;
   }
 
@@ -289,16 +288,16 @@ game.updateScore = () => {
 
 game.resetQuestion = () => {
   // Empty the HTML tags that show user input values, status and hints!
-  $('#lyrics').empty();
-  $('#artistName').val('');
-  $('#songTitle').val('');
+  $("#lyrics").empty();
+  $("#artistName").val("");
+  $("#songTitle").val("");
 
   // Reset values
   game.currTrackID = 0;
   game.currLyrics = [];
   game.currQuestion = [];
-  game.currAnswerArtist = '';
-  game.currAnswerTrack = '';
+  game.currAnswerArtist = "";
+  game.currAnswerTrack = "";
   game.currAttemptCount = 0;
 };
 
@@ -318,16 +317,16 @@ game.endGame = () => {
     title: "Time's up!",
     text: `Your total score is ${game.totalScore}.`,
     content: {
-      element: 'input',
+      element: "input",
       attributes: {
-        placeholder: 'Your name, you magical lyricist!',
+        placeholder: "Your name, you magical lyricist!",
       },
     },
-    button: 'Submit',
+    button: "Submit",
     closeOnClickOutside: false,
   }).then((playerName) => {
     if (!playerName) {
-      playerName = 'Wild Jigglypuff';
+      playerName = "Wild Jigglypuff";
     }
     // FIREBASE STORAGE OF PLAYER SCORE
     const scoreEntry = {
@@ -340,7 +339,7 @@ game.endGame = () => {
     // Reset the game and then go back to the home page
     game.resetGame();
 
-    $('#gamePage').toggleClass('hide');
-    $('#splashPage').toggleClass('hide');
+    $("#gamePage").toggleClass("hide");
+    $("#splashPage").toggleClass("hide");
   });
 };

@@ -6,7 +6,7 @@ const questionLibrary = {
   //   15953433 // Somebody That I Used To Know
   // ],
   // 13958599
-  'Ariana Grande': [
+  "Ariana Grande": [
     160369747, // Thank u, next
     155480782, // God is a woman
     155480787, // No Tears Left To Cry
@@ -38,7 +38,7 @@ const questionLibrary = {
     31508972, // Another One Bites The Dust
   ],
   // 33491916
-  'Justin Bieber': [
+  "Justin Bieber": [
     // 99575547, // Sorry
     17957946, // Boyfriend
     // 99575546, // What do you mean?
@@ -54,7 +54,7 @@ const questionLibrary = {
     84213314, // Water Under The Bridge
   ],
   // 33111847
-  'Ed Sheeran': [
+  "Ed Sheeran": [
     // 73109263, // Thinking Out Loud
     124985078, // Perfect
     124985077, // Shape Of You
@@ -62,7 +62,7 @@ const questionLibrary = {
     124985075, // Castle On The Hill
   ],
   // 378462
-  'Lady Gaga': [
+  "Lady Gaga": [
     158988975, // Lady Gaga
     // 30971160, // Born This Way
     // 15288003, // Bad Romance
