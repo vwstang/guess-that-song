@@ -9,7 +9,7 @@ const game = {
   currAttemptCount: 0,
   currTime: 0,
   totalScore: 0,
-  difficultyLevel: $("input[name=difficulty]:checked").val()
+  difficultyLevel: $("input[name=difficulty]:checked").val(),
 };
 
 //== METHOD: startQuestion ==//
@@ -17,25 +17,27 @@ const game = {
 game.startQuestion = () => {
   game.currTrackID = game.getRandomSong(questionLibrary);
   game.getAnswer();
-}
+};
 
 //== METHOD: getRandomSong ==//
 // Randomly select a song from the object passed in. Object passed in must consist of arrays.
 // Called from game.startQuestion()
-game.getRandomSong = objSongLibrary => {
+game.getRandomSong = (objSongLibrary) => {
   const keys = Object.keys(objSongLibrary);
   const randomIndex = Math.floor(Math.random() * keys.length);
   const artistSongList = objSongLibrary[keys[randomIndex]];
   return artistSongList[Math.floor(Math.random() * artistSongList.length)];
-}
+};
 
 //==-- METHOD: getAnswer --==//
 // Send AJAX request to musixmatch API with a track_id to obtain track information (i.e. song name and artist). When the request is completed, convert the response strings to regular expressions (performed in game.toRegEx()) and go get the question (performed in game.getQuestion()).
 // Called from game.startQuestion()
 game.getAnswer = () => {
-  $.when(apiRequest.getTrack(game.currTrackID)).then(res => {
+  $.when(apiRequest.getTrack(game.currTrackID)).then((res) => {
     // For debugging purposes
-    console.log(`Artist: ${res.message.body.track.artist_name}, Song: ${res.message.body.track.track_name}`);
+    console.log(
+      `Artist: ${res.message.body.track.artist_name}, Song: ${res.message.body.track.track_name}`
+    );
 
     // Convert the response strings to regular expressions
     game.currAnswerArtist = game.toRegEx(res.message.body.track.artist_name);
@@ -44,12 +46,12 @@ game.getAnswer = () => {
     // Got answers? Good, go get the question now.
     game.getQuestion();
   });
-}
+};
 
 //==-- METHOD: toRegEx --==//
 // Converts a song name into a regular expression to allow for fuzzy check against user answers.
 // Called from game.getAnswer()
-game.toRegEx = strArtistOrSong => {
+game.toRegEx = (strArtistOrSong) => {
   // Normalize the string by converting to lowercase so char codes are simpler to work with
   const lowercaseString = strArtistOrSong.toLowerCase();
 
@@ -65,7 +67,10 @@ game.toRegEx = strArtistOrSong => {
   for (let i = 0; i < lowercaseString.length; i++) {
     if (lowercaseString.charCodeAt(i) === openBracket) {
       i = lowercaseString.length; // If the current character in the string is a smooth open boi, exit the loop by setting iterator to the string length.
-    } else if (lowercaseString.charCodeAt(i) >= lowercaseA && lowercaseString.charCodeAt(i) <= lowercaseZ) {
+    } else if (
+      lowercaseString.charCodeAt(i) >= lowercaseA &&
+      lowercaseString.charCodeAt(i) <= lowercaseZ
+    ) {
       strRegEx += lowercaseString[i];
     } else {
       strRegEx += lowercaseString[i] + "?";
@@ -85,15 +90,17 @@ game.toRegEx = strArtistOrSong => {
 
   // Lastly, return the string as a Regular Expression that is case insensitive.
   return new RegExp(`^${strRegEx}$`, "i");
-}
+};
 
 //== METHOD: getQuestion ==//
 // Make an AJAX request to get the lyrics for the track_id passed to the API. When that is completed, then clean the response string up (because we are using the API for free, it includes unwanted text in the response string, so we need to trim those out for the game).
 // Called from game.getAnswer()
 game.getQuestion = () => {
-  $.when(apiRequest.getLyrics(game.currTrackID)).then(res => {
+  $.when(apiRequest.getLyrics(game.currTrackID)).then((res) => {
     // Select the lyrics within the response from the AJAX request, convert it into an array (by splitting the string up by new line characters), clean up the lyrics for API disclaimer text (performed in game.cleanLyrics()) and store it into the game object's currLyrics property.
-    game.currLyrics = game.cleanLyrics(res.message.body.lyrics.lyrics_body.split("\n"));
+    game.currLyrics = game.cleanLyrics(
+      res.message.body.lyrics.lyrics_body.split("\n")
+    );
 
     // Next step is to randomly pick three lines within the full currLyrics and store them into a separate array (performed in game.generateQuestion()).
     game.currQuestion = game.generateQuestion(game.currLyrics);
@@ -105,11 +112,11 @@ game.getQuestion = () => {
     // Print one line of the question lyrics to the DOM.
     app.printHTML("lyrics", "p", game.currQuestion.shift());
   });
-}
+};
 
 //== METHOD: cleanLyrics ==//
 // Iterates through the lyrics result array and removes unnecessary elements like blank spaces and the "NON COMMERICIAL USE DISCLAIMER" and returns the cleaned array
-game.cleanLyrics = arrLyrics => {
+game.cleanLyrics = (arrLyrics) => {
   let tempArray = [];
   for (let i = 0; i < arrLyrics.length; i++) {
     if (arrLyrics[i] === "...") {
@@ -121,14 +128,14 @@ game.cleanLyrics = arrLyrics => {
     }
   }
   return tempArray;
-}
+};
 
 //== METHOD: generateQuestion ==//
 // Receives an array with elements made up of lyric lines and returns 3 lines of lyrics selected at random (not 3 random lines, but randomly select a line and return that line and 2 following lines)
-game.generateQuestion = arrCleanLyrics => {
+game.generateQuestion = (arrCleanLyrics) => {
   const randomIndex = Math.floor(Math.random() * (arrCleanLyrics.length - 3));
-  return arrCleanLyrics.slice(randomIndex, (randomIndex + 3));
-}
+  return arrCleanLyrics.slice(randomIndex, randomIndex + 3);
+};
 
 //==-- METHOD: startTimer --==//
 // Start the game timer!
@@ -153,7 +160,7 @@ game.startTimer = () => {
   game.displayTime();
   // Set the timer to a variable so that clearInterval() can be called when the time runs out or if the user exits the game.
   game.counter = setInterval(game.timer, 1000);
-}
+};
 
 //==-- METHOD: displayTime --==//
 // Display the time on the DOM.
@@ -168,9 +175,9 @@ game.displayTime = () => {
       strTime = `${Math.floor(game.currTime / 60)}:${game.currTime % 60}`;
     }
   } else if (game.currTime < 10) {
-    strTime = `0:0${game.currTime}`
+    strTime = `0:0${game.currTime}`;
   } else {
-    strTime = `0:${game.currTime}`
+    strTime = `0:${game.currTime}`;
   }
 
   $("#timer").empty();
@@ -178,7 +185,7 @@ game.displayTime = () => {
 
   // For debugging purposes
   // console.log(game.currTime);
-}
+};
 
 //==-- METHOD: timer --==//
 // Actual timer function itself.
@@ -190,15 +197,18 @@ game.timer = () => {
     game.currTime--;
   }
   game.displayTime();
-}
+};
 
 //==-- METHOD: answerCheck --==//
 
 game.answerCheck = () => {
   const userArtist = $("#artistName").val();
   const userTrack = $("#songTitle").val();
-  if (game.currAnswerArtist.test(userArtist) && game.currAnswerTrack.test(userTrack)) {
-    console.log("Correct!"); // 
+  if (
+    game.currAnswerArtist.test(userArtist) &&
+    game.currAnswerTrack.test(userTrack)
+  ) {
+    console.log("Correct!"); //
     game.updateStatus("Correct! Good job!", "correct");
     // RUN UPDATE SCORE METHOD
     game.updateScore();
@@ -210,15 +220,15 @@ game.answerCheck = () => {
     console.log(game.currAttemptCount);
     game.updateStatus("Wrong, try again!", "incorrect");
   }
-}
+};
 
 game.updateStatus = (response, status) => {
   $("#status").empty();
   app.printHTML("status", `p class="${status}"`, response);
   setTimeout(() => {
     $("#status").empty();
-  },3000);
-}
+  }, 3000);
+};
 
 game.updateScore = () => {
   let baseScore, timeScoreBonus, hintScoreReducer, incorrectReducer;
@@ -246,16 +256,35 @@ game.updateScore = () => {
 
   // For debugging purposes
   console.log(`Base Score: ${baseScore}`);
-  console.log(`Revealed Hints: ${(game.currQuestion.length - 2)} x ${hintScoreReducer} = ${(hintScoreReducer * Math.abs(game.currQuestion.length - 2))}`);
-  console.log(`Incorrect Attempts: ${game.currAttemptCount} x ${incorrectReducer} = ${(incorrectReducer * game.currAttemptCount)}`);
-  console.log(`Current Question Score: ${baseScore + (hintScoreReducer * Math.abs(game.currQuestion.length - 2)) + (incorrectReducer * game.currAttemptCount)}`);
+  console.log(
+    `Revealed Hints: ${game.currQuestion.length - 2} x ${hintScoreReducer} = ${
+      hintScoreReducer * Math.abs(game.currQuestion.length - 2)
+    }`
+  );
+  console.log(
+    `Incorrect Attempts: ${game.currAttemptCount} x ${incorrectReducer} = ${
+      incorrectReducer * game.currAttemptCount
+    }`
+  );
+  console.log(
+    `Current Question Score: ${
+      baseScore +
+      hintScoreReducer * Math.abs(game.currQuestion.length - 2) +
+      incorrectReducer * game.currAttemptCount
+    }`
+  );
 
   // Update the total score
-  game.totalScore += Math.max((baseScore + (hintScoreReducer * Math.abs(game.currQuestion.length - 2)) + (incorrectReducer * game.currAttemptCount)),0);
+  game.totalScore += Math.max(
+    baseScore +
+      hintScoreReducer * Math.abs(game.currQuestion.length - 2) +
+      incorrectReducer * game.currAttemptCount,
+    0
+  );
 
   // Debugging purposes
   console.log(`Current total score: ${game.totalScore}`);
-}
+};
 
 game.resetQuestion = () => {
   // Empty the HTML tags that show user input values, status and hints!
@@ -270,7 +299,7 @@ game.resetQuestion = () => {
   game.currAnswerArtist = "";
   game.currAnswerTrack = "";
   game.currAttemptCount = 0;
-}
+};
 
 game.resetGame = () => {
   // Reset values and clock
@@ -278,40 +307,39 @@ game.resetGame = () => {
   game.totalScore = 0;
   game.currTime = 0;
   game.displayTime();
-}
+};
 
 game.endGame = () => {
   // Clear the interval
   clearInterval(game.counter);
-  
+
   swal({
     title: "Time's up!",
     text: `Your total score is ${game.totalScore}.`,
     content: {
       element: "input",
       attributes: {
-        placeholder: "Your name, you magical lyricist!"
+        placeholder: "Your name, you magical lyricist!",
       },
     },
     button: "Submit",
-    closeOnClickOutside: false
-  }).then(playerName => {
+    closeOnClickOutside: false,
+  }).then((playerName) => {
     if (!playerName) {
       playerName = "Wild Jigglypuff";
     }
     // FIREBASE STORAGE OF PLAYER SCORE
     const scoreEntry = {
       name: playerName,
-      score: game.totalScore
-    }
-    
+      score: game.totalScore,
+    };
+
     leaderboard.db.push(scoreEntry);
-    
+
     // Reset the game and then go back to the home page
     game.resetGame();
-  
+
     $("#gamePage").toggleClass("hide");
     $("#splashPage").toggleClass("hide");
   });
-
-}
+};

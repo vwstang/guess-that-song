@@ -1,4 +1,5 @@
-@media (min-width: 360px) and (min-height: 600px) { /* smartphones, Android phones, landscape iPhone */ 
+@media (min-width: 360px) and (min-height: 600px) {
+  /* smartphones, Android phones, landscape iPhone */
   body {
     font-size: $primary-text-tablet;
   }
@@ -8,8 +9,8 @@
   }
 }
 
-
-@media (min-width: 600px) { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
+@media (min-width: 600px) {
+  /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
   .splashPageTitle .wrapper {
     display: flex;
     flex-direction: row;
@@ -39,7 +40,6 @@
       font-size: $text-medium;
     }
   }
-
 }
 
 @media (min-width: 660px) and (min-height: 600px) {
@@ -48,10 +48,11 @@
   // }
 }
 
-@media (min-width:801px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
-
+@media (min-width: 801px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
 }
-@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
+@media (min-width: 1025px) {
+  /* big landscape tablets, laptops, and desktops */
   // .title {
   //   font-size: $guessThatGame-text;
   //   display: flex;
@@ -61,4 +62,6 @@
   //   }
   // }
 }
-@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+@media (min-width: 1281px) {
+  /* hi-res laptops and desktops */
+}

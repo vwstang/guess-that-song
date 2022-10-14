@@ -7,10 +7,15 @@
   padding: 10px 0;
   border-radius: 10px;
   border: none;
-  box-shadow: var(--text-shadow) 1px 1px,var(--text-shadow) 2px 2px,var(--text-shadow) 3px 3px,var(--text-shadow) 4px 4px,var(--text-shadow) 5px 5px,var(--text-shadow) 6px 6px,var(--text-shadow) 7px 7px,var(--text-shadow) 8px 8px,var(--text-shadow) 9px 9px,var(--text-shadow) 10px 10px,var(--text-shadow) 11px 11px;
+  box-shadow: var(--text-shadow) 1px 1px, var(--text-shadow) 2px 2px,
+    var(--text-shadow) 3px 3px, var(--text-shadow) 4px 4px,
+    var(--text-shadow) 5px 5px, var(--text-shadow) 6px 6px,
+    var(--text-shadow) 7px 7px, var(--text-shadow) 8px 8px,
+    var(--text-shadow) 9px 9px, var(--text-shadow) 10px 10px,
+    var(--text-shadow) 11px 11px;
   text-align: center;
   text-transform: uppercase;
-  color: #FFF;
+  color: #fff;
   user-select: none;
 
   &:active {
@@ -20,12 +25,12 @@
   }
 
   &:hover {
-      cursor: pointer;
-      background: lighten($accentColor, 10%);
+    cursor: pointer;
+    background: lighten($accentColor, 10%);
   }
 }
 
-.splashPageButtons  {
+.splashPageButtons {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,11 +43,9 @@
 }
 
 .btnGamePage {
-  box-shadow: var(--text-shadow) -1px 1px,
-              var(--text-shadow) -2px 2px,
-              var(--text-shadow) -3px 3px,
-              var(--text-shadow) -4px 4px,
-              var(--text-shadow) -5px 5px;
+  box-shadow: var(--text-shadow) -1px 1px, var(--text-shadow) -2px 2px,
+    var(--text-shadow) -3px 3px, var(--text-shadow) -4px 4px,
+    var(--text-shadow) -5px 5px;
   margin-top: 1.5rem;
 
   &:active {

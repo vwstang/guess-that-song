@@ -1,6 +1,6 @@
 .splashPageTitle {
   height: 100vh;
-  
+
   & .wrapper {
     display: flex;
     flex-direction: column;
@@ -11,13 +11,13 @@
 }
 
 .title {
-    @include headerFont($guessThatGame-text, $gtsColor);
-    margin: 0;
-    font-size: 6rem;
+  @include headerFont($guessThatGame-text, $gtsColor);
+  margin: 0;
+  font-size: 6rem;
 }
 
 h1 span {
-    display: block;
+  display: block;
 }
 
 .particles-js {
